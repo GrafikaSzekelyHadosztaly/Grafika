@@ -22,5 +22,7 @@ int main(int argc, char **argv)
     mwnd.showMaximized();
 
   //tisztitas1
+
+    //tisztiaaaaa 2
     return app.exec();
 }
