@@ -545,6 +545,10 @@ namespace cagd
                 _patch_index = 0;
                 _shader_index = 0;
                 _material_index = 0;
+                _patch1_index = 0;
+                _patch2_index = 0;
+                _dir1 = 0;
+                _dir2 = 0;
 
                 _hermite_surface = new HermiteCompositeSurface3();
 
@@ -1205,6 +1209,103 @@ namespace cagd
             _hermite_surface->SetMaterial(_patch_index, &MatFBBrass);
             break;
         }
+
+        return GL_TRUE;
+    }
+
+    void GLWidget::set_direction1(int value) {
+        if(_dir1 != value)
+        {
+            _dir1 = value;
+        }
+    }
+
+    void GLWidget::set_direction2(int value) {
+        if(_dir2 != value)
+        {
+            _dir2 = value;
+        }
+    }
+
+    void GLWidget::set_patch1_index(int value)
+    {
+        if(_patch1_index != value)
+        {
+            _patch1_index = value;
+        }
+    }
+
+    void GLWidget::set_patch2_index(int value)
+    {
+        if(_patch2_index != value)
+        {
+            _patch2_index = value;
+        }
+    }
+
+    GLboolean GLWidget::call_extend_patch()
+    {
+        GLuint n = _hermite_surface->GetNumberOfPatches();
+        if(_patch1_index > n - 1)
+        {
+            cout << "Patch 1 index not existing" << endl;
+            return GL_FALSE;
+        }
+
+        _hermite_surface->ExtendPatch(_patch1_index, _dir1);
+
+        return GL_TRUE;
+    }
+
+    GLboolean GLWidget::call_join_patch()
+    {
+        GLuint n = _hermite_surface->GetNumberOfPatches();
+        if(_patch1_index > n - 1)
+        {
+            cout << "Patch 1 index not existing" << endl;
+            return GL_FALSE;
+        }
+        if(_patch2_index > n - 1)
+        {
+            cout << "Patch 2 index not existing" << endl;
+            return GL_FALSE;
+        }
+        if(_patch1_index == _patch2_index)
+        {
+            cout << "Patch 1 index can't be equal with Patch 2 index" << endl;
+            return GL_FALSE;
+        }
+        if(_dir1 % 2 == 1 || _dir2 % 2 == 1)
+        {
+            cout << "Join can be only done in sides" << endl;
+            return GL_FALSE;
+        }
+
+        _hermite_surface->JoinTwoPatches(_patch1_index, _patch2_index, _dir1, _dir2);
+
+        return GL_TRUE;
+    }
+
+    GLboolean GLWidget::call_merge_patch()
+    {
+        GLuint n = _hermite_surface->GetNumberOfPatches();
+        if(_patch1_index > n - 1)
+        {
+            cout << "Patch 1 index not existing" << endl;
+            return GL_FALSE;
+        }
+        if(_patch2_index > n - 1)
+        {
+            cout << "Patch 2 index not existing" << endl;
+            return GL_FALSE;
+        }
+        if(_patch1_index == _patch2_index)
+        {
+            cout << "Patch 1 index can't be equal with Patch 2 index" << endl;
+            return GL_FALSE;
+        }
+
+        _hermite_surface->MergeTwoPatches(_patch1_index, _patch2_index, _dir1, _dir2);
 
         return GL_TRUE;
     }

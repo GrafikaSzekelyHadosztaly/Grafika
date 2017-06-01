@@ -92,10 +92,17 @@ namespace cagd
 
         // PROJEKT
         HermiteCompositeSurface3 *_hermite_surface;
+        // patch file index olvasashoz
         GLuint _file_index;
+        // patch attributum valtoztatas
         GLuint _patch_index;
         GLuint _shader_index;
         GLuint _material_index;
+        // patch ext, join, merge
+        GLuint _patch1_index;
+        GLuint _patch2_index;
+        GLuint _dir1;
+        GLuint _dir2;
 
     //protected:
 
@@ -127,13 +134,22 @@ namespace cagd
         void set_index(int value);
 
         // PROJEKT
+        // patch olvasas filebol
         void set_file_index(int);
         void call_read_patch();
         GLboolean read_patch(GLuint i);
-
+        // patch attributumok valtoztatasa
         void set_patch_index(int);
         GLboolean set_shader_index(int);
         GLboolean set_material_index(int);
+        // patch ext, join, merge
+        void set_direction1(int);
+        void set_direction2(int);
+        void set_patch1_index(int);
+        void set_patch2_index(int);
+        GLboolean call_extend_patch();
+        GLboolean call_join_patch();
+        GLboolean call_merge_patch();
 
     private slots:
         void _animate();

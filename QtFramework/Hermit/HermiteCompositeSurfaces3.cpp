@@ -503,7 +503,7 @@ GLboolean HermiteCompositeSurface3::ExtendPatch(GLuint index, GLuint dir)
             _vectors2 = GetSouth(index);
             _vectors = Extend(_vectors1, _vectors2, 8);
 
-            SetSouth(index, _vectors);
+            SetNorth(index, _vectors);
             break;
 
         case 1:
@@ -512,7 +512,7 @@ GLboolean HermiteCompositeSurface3::ExtendPatch(GLuint index, GLuint dir)
             _vectors2 = GetSouthWest(index);
             _vectors = Extend(_vectors1, _vectors2, 4);
 
-            SetSouth(index, _vectors);
+            SetNorthEast(index, _vectors);
             break;
 
         case 2:
@@ -521,7 +521,7 @@ GLboolean HermiteCompositeSurface3::ExtendPatch(GLuint index, GLuint dir)
             _vectors2 = GetWest(index);
             _vectors = Extend(_vectors1, _vectors2, 8);
 
-            SetSouth(index, _vectors);
+            SetEast(index, _vectors);
             break;
 
         case 3:
@@ -530,7 +530,7 @@ GLboolean HermiteCompositeSurface3::ExtendPatch(GLuint index, GLuint dir)
             _vectors2 = GetNorthWest(index);
             _vectors = Extend(_vectors1, _vectors2, 4);
 
-            SetSouth(index, _vectors);
+            SetSouthEast(index, _vectors);
             break;
 
         case 4:
@@ -548,7 +548,7 @@ GLboolean HermiteCompositeSurface3::ExtendPatch(GLuint index, GLuint dir)
             _vectors2 = GetNorthEast(index);
             _vectors = Extend(_vectors1, _vectors2, 4);
 
-            SetSouth(index, _vectors);
+            SetSouthWest(index, _vectors);
             break;
 
         case 6:
@@ -557,7 +557,7 @@ GLboolean HermiteCompositeSurface3::ExtendPatch(GLuint index, GLuint dir)
             _vectors2 = GetEast(index);
             _vectors = Extend(_vectors1, _vectors2, 8);
 
-            SetSouth(index, _vectors);
+            SetWest(index, _vectors);
             break;
 
         case 7:
@@ -566,7 +566,7 @@ GLboolean HermiteCompositeSurface3::ExtendPatch(GLuint index, GLuint dir)
             _vectors2 = GetSouthEast(index);
             _vectors = Extend(_vectors1, _vectors2, 4);
 
-            SetSouth(index, _vectors);
+            SetNorthWest(index, _vectors);
             break;
         }
 
