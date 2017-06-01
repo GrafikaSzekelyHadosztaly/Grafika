@@ -290,7 +290,7 @@ namespace cagd
         //else
         if (_column_count != column_count)
         {
-            for (int i = 0; i < _row_count; i++)
+            for (GLuint i = 0; i < _row_count; i++)
                 _data[i].resize(column_count);
             _column_count = column_count;
         }
@@ -471,7 +471,7 @@ namespace cagd
             else                                  // nagyobb lesz a matrix
             {
                 _data.resize(row_count);
-                for (int i = _row_count; i < row_count; i++)
+                for (GLuint i = _row_count; i < row_count; i++)
                     _data[i].resize(i+1);
                 _row_count = row_count;
             }

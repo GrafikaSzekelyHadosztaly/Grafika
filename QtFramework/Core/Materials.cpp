@@ -78,91 +78,91 @@ GLvoid Material::Apply()
 
 // brass
 Material cagd::MatFBBrass = Material(
-                        Color4(0.329412, 0.223529, 0.027451, 0.4),
-                        Color4(0.780392, 0.568627, 0.113725, 0.6),
-                        Color4(0.992157, 0.941176, 0.807843, 0.8),
+                        Color4((GLfloat)0.329412, (GLfloat)0.223529, (GLfloat)0.027451, (GLfloat)0.4),
+                        Color4((GLfloat)0.780392, (GLfloat)0.568627, (GLfloat)0.113725, (GLfloat)0.6),
+                        Color4((GLfloat)0.992157, (GLfloat)0.941176, (GLfloat)0.807843, (GLfloat)0.8),
                         Color4(0.000000, 0.000000, 0.000000, 0.0),
                         27.8974,
-                        Color4(0.329412, 0.223529, 0.027451, 0.4),
-                        Color4(0.780392, 0.568627, 0.113725, 0.6),
-                        Color4(0.992157, 0.941176, 0.807843, 0.8),
+                        Color4((GLfloat)0.329412, (GLfloat)0.223529, (GLfloat)0.027451, (GLfloat)0.4),
+                        Color4((GLfloat)0.780392, (GLfloat)0.568627, (GLfloat)0.113725, (GLfloat)0.6),
+                        Color4((GLfloat)0.992157, (GLfloat)0.941176, (GLfloat)0.807843, (GLfloat)0.8),
                         Color4(0.000000, 0.000000, 0.000000, 0.0),
-                        27.8974);
+                        (GLfloat)27.8974);
 
 // emerald
 Material cagd::MatFBEmerald = Material(
-                        Color4(0.021500, 0.174500, 0.021500, 0.4),
-                        Color4(0.075680, 0.614240, 0.075680, 0.6),
-                        Color4(0.633000, 0.727811, 0.633000, 0.8),
+                        Color4((GLfloat)0.021500, (GLfloat)0.174500, (GLfloat)0.021500, (GLfloat)0.4),
+                        Color4((GLfloat)0.075680, (GLfloat)0.614240, (GLfloat)0.075680, (GLfloat)0.6),
+                        Color4((GLfloat)0.633000, (GLfloat)0.727811, (GLfloat)0.633000, (GLfloat)0.8),
                         Color4(0.000000, 0.000000, 0.000000, 0.0),
                         76.8,
-                        Color4(0.021500, 0.174500, 0.021500, 0.4),
-                        Color4(0.075680, 0.614240, 0.075680, 0.6),
-                        Color4(0.633000, 0.727811, 0.633000, 0.8),
+                        Color4((GLfloat)0.021500, (GLfloat)0.174500, (GLfloat)0.021500, (GLfloat)0.4),
+                        Color4((GLfloat)0.075680, (GLfloat)0.614240, (GLfloat)0.075680, (GLfloat)0.6),
+                        Color4((GLfloat)0.633000, (GLfloat)0.727811, (GLfloat)0.633000, (GLfloat)0.8),
                         Color4(0.000000, 0.000000, 0.000000, 0.0),
-                        76.8);
+                        (GLfloat)76.8);
 
 // gold
 Material cagd::MatFBGold = Material(
-                        Color4(0.247250, 0.199500, 0.074500, 0.4),
-                        Color4(0.751640, 0.606480, 0.226480, 0.6),
-                        Color4(0.628281, 0.555802, 0.366065, 0.8),
+                        Color4((GLfloat)0.247250, (GLfloat)0.199500, (GLfloat)0.074500, (GLfloat)0.4),
+                        Color4((GLfloat)0.751640, (GLfloat)0.606480, (GLfloat)0.226480, (GLfloat)0.6),
+                        Color4((GLfloat)0.628281, (GLfloat)0.555802, (GLfloat)0.366065, (GLfloat)0.8),
                         Color4(0.000000, 0.000000, 0.000000, 0.0),
                         51.2,
-                        Color4(0.247250, 0.199500, 0.074500, 0.4),
-                        Color4(0.751640, 0.606480, 0.226480, 0.6),
-                        Color4(0.628281, 0.555802, 0.366065, 0.8),
+                        Color4((GLfloat)0.247250, (GLfloat)0.199500, (GLfloat)0.074500, (GLfloat)0.4),
+                        Color4((GLfloat)0.751640, (GLfloat)0.606480, (GLfloat)0.226480, (GLfloat)0.6),
+                        Color4((GLfloat)0.628281, (GLfloat)0.555802, (GLfloat)0.366065, (GLfloat)0.8),
                         Color4(0.000000, 0.000000, 0.000000, 0.0),
-                        51.2);
+                        (GLfloat)51.2);
 
 // pearl
 Material cagd::MatFBPearl = Material(
-                        Color4(0.250000, 0.207250, 0.207250, 0.4),
-                        Color4(1.000000, 0.829000, 0.829000, 0.6),
-                        Color4(0.296648, 0.296648, 0.296648, 0.8),
+                        Color4((GLfloat)0.250000, (GLfloat)0.207250, (GLfloat)0.207250, (GLfloat)0.4),
+                        Color4((GLfloat)1.000000, (GLfloat)0.829000, (GLfloat)0.829000, (GLfloat)0.6),
+                        Color4((GLfloat)0.296648, (GLfloat)0.296648, (GLfloat)0.296648, (GLfloat)0.8),
                         Color4(0.000000, 0.000000, 0.000000, 0.0),
                         11.264,
-                        Color4(0.250000, 0.207250, 0.207250, 0.4),
-                        Color4(1.000000, 0.829000, 0.829000, 0.6),
-                        Color4(0.296648, 0.296648, 0.296648, 0.8),
+                        Color4((GLfloat)0.250000, (GLfloat)0.207250, (GLfloat)0.207250, (GLfloat)0.4),
+                        Color4((GLfloat)1.000000, (GLfloat)0.829000, (GLfloat)0.829000, (GLfloat)0.6),
+                        Color4((GLfloat)0.296648, (GLfloat)0.296648, (GLfloat)0.296648, (GLfloat)0.8),
                         Color4(0.000000, 0.000000, 0.000000, 0.0),
-                        11.264);
+                        (GLfloat)11.264);
 
 // ruby
 Material cagd::MatFBRuby = Material(
-                        Color4(0.174500, 0.011750, 0.011750, 0.4),
-                        Color4(0.614240, 0.041360, 0.041360, 0.6),
-                        Color4(0.727811, 0.626959, 0.626959, 0.8),
+                        Color4((GLfloat)0.174500, (GLfloat)0.011750, (GLfloat)0.011750, (GLfloat)0.4),
+                        Color4((GLfloat)0.614240, (GLfloat)0.041360, (GLfloat)0.041360, (GLfloat)0.6),
+                        Color4((GLfloat)0.727811, (GLfloat)0.626959, (GLfloat)0.626959, (GLfloat)0.8),
                         Color4(0.000000, 0.000000, 0.000000, 0.0),
                         76.8,
-                        Color4(0.174500, 0.011750, 0.011750, 0.4),
-                        Color4(0.614240, 0.041360, 0.041360, 0.6),
-                        Color4(0.727811, 0.626959, 0.626959, 0.8),
+                        Color4((GLfloat)0.174500, (GLfloat)0.011750, (GLfloat)0.011750, (GLfloat)0.4),
+                        Color4((GLfloat)0.614240, (GLfloat)0.041360, (GLfloat)0.041360, (GLfloat)0.6),
+                        Color4((GLfloat)0.727811, (GLfloat)0.626959, (GLfloat)0.626959, (GLfloat)0.8),
                         Color4(0.000000, 0.000000, 0.000000, 0.0),
-                        76.8);
+                        (GLfloat)76.8);
 
 // silver
 Material cagd::MatFBSilver = Material(
-                        Color4(0.192250, 0.192250, 0.192250, 0.4),
-                        Color4(0.507540, 0.507540, 0.507540, 0.6),
-                        Color4(0.508273, 0.508273, 0.508273, 0.8),
+                        Color4((GLfloat)0.192250, (GLfloat)0.192250, (GLfloat)0.192250, (GLfloat)0.4),
+                        Color4((GLfloat)0.507540, (GLfloat)0.507540, (GLfloat)0.507540, (GLfloat)0.6),
+                        Color4((GLfloat)0.508273, (GLfloat)0.508273, (GLfloat)0.508273, (GLfloat)0.8),
                         Color4(0.000000, 0.000000, 0.000000, 0.0),
                         51.2,
-                        Color4(0.192250, 0.192250, 0.192250, 0.4),
-                        Color4(0.507540, 0.507540, 0.507540, 0.6),
-                        Color4(0.508273, 0.508273, 0.508273, 0.8),
+                        Color4((GLfloat)0.192250, (GLfloat)0.192250, (GLfloat)0.192250, (GLfloat)0.4),
+                        Color4((GLfloat)0.507540, (GLfloat)0.507540, (GLfloat)0.507540, (GLfloat)0.6),
+                        Color4((GLfloat)0.508273, (GLfloat)0.508273, (GLfloat)0.508273, (GLfloat)0.8),
                         Color4(0.000000, 0.000000, 0.000000, 0.0),
-                        51.2);
+                        (GLfloat)51.2);
 
 // turquoise
 Material cagd::MatFBTurquoise = Material(
-                        Color4(0.100000, 0.187250, 0.174500, 0.4),
-                        Color4(0.396000, 0.741510, 0.691020, 0.6),
-                        Color4(0.297254, 0.308290, 0.306678, 0.8),
+                        Color4((GLfloat)0.100000, (GLfloat)0.187250, (GLfloat)0.174500, (GLfloat)0.4),
+                        Color4((GLfloat)0.396000, (GLfloat)0.741510, (GLfloat)0.691020, (GLfloat)0.6),
+                        Color4((GLfloat)0.297254, (GLfloat)0.308290, (GLfloat)0.306678, (GLfloat)0.8),
                         Color4(0.000000, 0.000000, 0.000000, 0.0),
                         12.8,
-                        Color4(0.100000, 0.187250, 0.174500, 0.4),
-                        Color4(0.396000, 0.741510, 0.691020, 0.6),
-                        Color4(0.297254, 0.308290, 0.306678, 0.8),
+                        Color4((GLfloat)0.100000, (GLfloat)0.187250, (GLfloat)0.174500, (GLfloat)0.4),
+                        Color4((GLfloat)0.396000, (GLfloat)0.741510, (GLfloat)0.691020, (GLfloat)0.6),
+                        Color4((GLfloat)0.297254, (GLfloat)0.308290, (GLfloat)0.306678, (GLfloat)0.8),
                         Color4(0.000000, 0.000000, 0.000000, 0.0),
-                        12.8);
+                        (GLfloat)12.8);

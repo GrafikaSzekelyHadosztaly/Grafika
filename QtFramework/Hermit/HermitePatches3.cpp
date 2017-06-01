@@ -380,10 +380,10 @@ GLboolean HermitePatch::CalculatePartialDerivatives(GLuint maximum_order_of_deri
     pd.ResizeRows(maximum_order_of_derivatives + 1);
     pd.LoadNullVectors();
 
-    for (int i = 0; i < _data.GetRowCount(); i++)
+    for (GLuint i = 0; i < _data.GetRowCount(); i++)
     {
         DCoordinate3 aux_d0_v, aux_d1_v, aux_d2_v, aux_d3_v;
-        for (int j = 0; j < _data.GetColumnCount(); j++)
+        for (GLuint j = 0; j < _data.GetColumnCount(); j++)
         {
             aux_d0_v += _data(i,j) * v_blending_values(j);
             aux_d1_v += _data(i,j) * v_d1_blending_values(j);
