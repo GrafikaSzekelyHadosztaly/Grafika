@@ -2,7 +2,7 @@
 
 using namespace cagd;
 using namespace std;
-
+// valtoztatok
 HermiteCompositeSurface3::HermiteCompositeSurface3()
 {
 
