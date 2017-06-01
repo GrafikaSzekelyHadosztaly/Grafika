@@ -23,5 +23,6 @@ int main(int argc, char **argv)
 
     // running the application
 //beleirtam egy uj kodot
+    // en is beirok egyet
     return app.exec();
 }
