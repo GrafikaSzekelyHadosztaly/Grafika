@@ -634,7 +634,7 @@ namespace cagd
                 //read_patch(0);
 
                 _hermite_surface->InsertIsolatedPatch(corners, uTangents, vTangents, twists);
-                _hermite_surface->SetAttributes(1, &_two_sided_lighting, &MatFBSilver);
+                _hermite_surface->SetAttributes(1, &_two_sided_lighting, &MatFBEmerald);
 
                 //_hermite_surface->MergeTwoPatches(0, 1, 4, 0);
                 //_hermite_surface->JoinTwoPatches(0, 1, 4, 0);
