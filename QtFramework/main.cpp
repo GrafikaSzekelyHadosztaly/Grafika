@@ -21,8 +21,6 @@ int main(int argc, char **argv)
     MainWindow mwnd;
     mwnd.showMaximized();
 
-    // running the application
-//beleirtam egy uj kodot
-    //en is akkor
+  //tisztitas1
     return app.exec();
 }
