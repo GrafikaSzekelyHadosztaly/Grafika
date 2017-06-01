@@ -415,34 +415,62 @@ GLboolean HermiteCompositeSurface3::JoinTwoPatches(GLuint patch1, GLuint patch2,
     _patches.resize(n + 1);
     _patches[n]._patch = new HermitePatch();
 
-    switch(dir1)
-    {
-    case 0:
-        // NOTRH
-        // switch(dir2) case 0, 2, 4, 6
-        break;
+    switch (dir2) {
+        case 0:
+            _vectors2 = GetNorth(patch2);
+            break;
+        case 2:
+            _vectors2 = GetEast(patch2);
+            break;
+        case 4:
+            _vectors2 = GetSouth(patch2);
+            break;
+        case 6:
+            _vectors2 = GetWest(patch2);
+            break;
+        default:
+            break;
+        }
 
-    case 2:
-        // EAST
+        switch(dir1)
+        {
+        case 0:
+            // NOTRH
+            // switch(dir2) case 0, 2, 4, 6
 
-        break;
+            _vectors1 = GetNorth(patch1);
 
-    case 4:
-        // SOUTH
+            SetSouth(n, _vectors1);
+            SetNorth(n, _vectors2);
+            break;
 
-        // ez dir2 = 0 -re:
-        _vectors1 = GetSouth(patch1);
-        _vectors2 = GetNorth(patch2);
+        case 2:
+            // EAST
 
-        SetNorth(n, _vectors1);
-        SetSouth(n, _vectors2);
-        break;
+            _vectors1 = GetEast(patch1);
 
-    case 6:
-        // WEST
+            SetWest(n, _vectors1);
+            SetEast(n, _vectors2);
+            break;
 
-        break;
-    }
+        case 4:
+            // SOUTH
+
+            _vectors1 = GetSouth(patch1);
+
+            SetNorth(n, _vectors1);
+            SetSouth(n, _vectors2);
+            break;
+
+        case 6:
+            // WEST
+
+            _vectors1 = GetWest(patch1);
+
+            SetEast(n, _vectors1);
+            SetWest(n, _vectors2);
+            break;
+        }
 
     _patches[patch1]._neighbours[dir1]  = &_patches[n];
 
@@ -468,51 +496,79 @@ GLboolean HermiteCompositeSurface3::ExtendPatch(GLuint index, GLuint dir)
     DCoordinate3* _vectors;
 
     switch(dir)
-    {
-    case 0:
-        // NOTRH
+        {
+        case 0:
+            // NOTRH
+            _vectors1 = GetNorth(index);
+            _vectors2 = GetSouth(index);
+            _vectors = Extend(_vectors1, _vectors2, 8);
 
-        break;
+            SetSouth(index, _vectors);
+            break;
 
-    case 1:
-        // NORTHEAST
+        case 1:
+            // NORTHEAST
+            _vectors1 = GetNorthEast(index);
+            _vectors2 = GetSouthWest(index);
+            _vectors = Extend(_vectors1, _vectors2, 4);
 
-        break;
+            SetSouth(index, _vectors);
+            break;
 
-    case 2:
-        // EAST
+        case 2:
+            // EAST
+            _vectors1 = GetEast(index);
+            _vectors2 = GetWest(index);
+            _vectors = Extend(_vectors1, _vectors2, 8);
 
-        break;
+            SetSouth(index, _vectors);
+            break;
 
-    case 3:
-        // SOUTHEAST
+        case 3:
+            // SOUTHEAST
+            _vectors1 = GetSouthEast(index);
+            _vectors2 = GetNorthWest(index);
+            _vectors = Extend(_vectors1, _vectors2, 4);
 
-        break;
+            SetSouth(index, _vectors);
+            break;
 
-    case 4:
-        // SOUTH
-        _vectors1 = GetSouth(index);
-        _vectors2 = GetNorth(index);
-        _vectors = Extend(_vectors1, _vectors2, 8);
+        case 4:
+            // SOUTH
+            _vectors1 = GetSouth(index);
+            _vectors2 = GetNorth(index);
+            _vectors = Extend(_vectors1, _vectors2, 8);
 
-        SetSouth(index, _vectors);
-        break;
+            SetSouth(index, _vectors);
+            break;
 
-    case 5:
-        // SOUTHWEST
+        case 5:
+            // SOUTHWEST
+            _vectors1 = GetSouthWest(index);
+            _vectors2 = GetNorthEast(index);
+            _vectors = Extend(_vectors1, _vectors2, 4);
 
-        break;
+            SetSouth(index, _vectors);
+            break;
 
-    case 6:
-        // WEST
+        case 6:
+            // WEST
+            _vectors1 = GetWest(index);
+            _vectors2 = GetEast(index);
+            _vectors = Extend(_vectors1, _vectors2, 8);
 
-        break;
+            SetSouth(index, _vectors);
+            break;
 
-    case 7:
-        // NORTHWEST
+        case 7:
+            // NORTHWEST
+            _vectors1 = GetNorthWest(index);
+            _vectors2 = GetSouthEast(index);
+            _vectors = Extend(_vectors1, _vectors2, 4);
 
-        break;
-    }
+            SetSouth(index, _vectors);
+            break;
+        }
 
     GenerateImagesOfAllPatches();
 
