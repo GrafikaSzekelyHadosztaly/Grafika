@@ -22,6 +22,6 @@ int main(int argc, char **argv)
     mwnd.showMaximized();
 
     // running the application
-
+//beleirtam egy uj kodot
     return app.exec();
 }
