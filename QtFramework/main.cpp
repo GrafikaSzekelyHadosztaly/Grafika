@@ -23,5 +23,6 @@ int main(int argc, char **argv)
 
     // running the application
 //beleirtam egy uj kodot
+    //en is akkor
     return app.exec();
 }
