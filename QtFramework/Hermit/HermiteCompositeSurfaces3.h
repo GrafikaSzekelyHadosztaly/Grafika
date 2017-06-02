@@ -57,6 +57,10 @@ namespace cagd {
             GLboolean ExtendPatch(GLuint index, GLuint dir);
             DCoordinate3* Extend(DCoordinate3* vectors1, DCoordinate3* vectors2, GLuint count);
 
+            GLboolean SetTransX(GLuint index, GLdouble x);
+            GLboolean SetTransY(GLuint index, GLdouble y);
+            GLboolean SetTransZ(GLuint index, GLdouble z);
+
             GLuint GetNumberOfPatches();
 
             DCoordinate3* GetSouth(GLuint i);

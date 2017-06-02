@@ -150,6 +150,13 @@ namespace cagd
         GLboolean call_extend_patch();
         GLboolean call_join_patch();
         GLboolean call_merge_patch();
+        // translacio x, y, z iranyokba
+        void plus_X();
+        void minus_X();
+        void plus_Y();
+        void minus_Y();
+        void plus_Z();
+        void minus_Z();
 
     private slots:
         void _animate();

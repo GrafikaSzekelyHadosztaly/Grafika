@@ -579,10 +579,70 @@ DCoordinate3* HermiteCompositeSurface3::Extend(DCoordinate3* vectors1, DCoordina
     DCoordinate3 *ret = new DCoordinate3[count];
     for(GLuint i = 0; i < count; i++)
     {
-        ret[i] = (2*vectors1[i] - vectors2[i]);
+        if(i < count/4)
+            ret[i] = (2*vectors1[i] - vectors2[i]);
+        else
+            ret[i] = vectors1[i];
     }
 
     return ret;
+}
+
+GLboolean HermiteCompositeSurface3::SetTransX(GLuint index, GLdouble x)
+{
+    if(index > _patches.size()-1)
+    {
+        cout << "Patch index not existing" << endl;
+        return GL_FALSE;
+    }
+
+    _patches[index]._patch->GetCorner(0, 0)[0] += x;
+    _patches[index]._patch->GetCorner(0, 1)[0] += x;
+    _patches[index]._patch->GetCorner(1, 0)[0] += x;
+    _patches[index]._patch->GetCorner(1, 1)[0] += x;
+    // kiegesziteni... ne csak index. patchet mozgatni, hanem neki szomszedait,s nekik szomszedait, stb...
+
+    GenerateImagesOfAllPatches();
+
+    return GL_TRUE;
+}
+
+GLboolean HermiteCompositeSurface3::SetTransY(GLuint index, GLdouble y)
+{
+    if(index > _patches.size()-1)
+    {
+        cout << "Patch index not existing" << endl;
+        return GL_FALSE;
+    }
+
+    _patches[index]._patch->GetCorner(0, 0)[1] += y;
+    _patches[index]._patch->GetCorner(0, 1)[1] += y;
+    _patches[index]._patch->GetCorner(1, 0)[1] += y;
+    _patches[index]._patch->GetCorner(1, 1)[1] += y;
+    // kiegesziteni... ne csak index. patchet mozgatni, hanem neki szomszedait,s nekik szomszedait, stb...
+
+    GenerateImagesOfAllPatches();
+
+    return GL_TRUE;
+}
+
+GLboolean HermiteCompositeSurface3::SetTransZ(GLuint index, GLdouble z)
+{
+    if(index > _patches.size()-1)
+    {
+        cout << "Patch index not existing" << endl;
+        return GL_FALSE;
+    }
+
+    _patches[index]._patch->GetCorner(0, 0)[2] += z;
+    _patches[index]._patch->GetCorner(0, 1)[2] += z;
+    _patches[index]._patch->GetCorner(1, 0)[2] += z;
+    _patches[index]._patch->GetCorner(1, 1)[2] += z;
+    // kiegesziteni... ne csak index. patchet mozgatni, hanem neki szomszedait,s nekik szomszedait, stb...
+
+    GenerateImagesOfAllPatches();
+
+    return GL_TRUE;
 }
 
 GLuint HermiteCompositeSurface3::GetNumberOfPatches()

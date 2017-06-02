@@ -1309,4 +1309,40 @@ namespace cagd
 
         return GL_TRUE;
     }
+
+    void GLWidget::plus_X()
+    {
+        _hermite_surface->SetTransX(_patch_index, 0.1);
+        updateGL();
+    }
+
+    void GLWidget::minus_X()
+    {
+        _hermite_surface->SetTransX(_patch_index, -0.1);
+        updateGL();
+    }
+
+    void GLWidget::plus_Y()
+    {
+        _hermite_surface->SetTransY(_patch_index, 0.1);
+        updateGL();
+    }
+
+    void GLWidget::minus_Y()
+    {
+        _hermite_surface->SetTransY(_patch_index, -0.1);
+        updateGL();
+    }
+
+    void GLWidget::plus_Z()
+    {
+        _hermite_surface->SetTransZ(_patch_index, 0.1);
+        updateGL();
+    }
+
+    void GLWidget::minus_Z()
+    {
+        _hermite_surface->SetTransZ(_patch_index, -0.1);
+        updateGL();
+    }
 }

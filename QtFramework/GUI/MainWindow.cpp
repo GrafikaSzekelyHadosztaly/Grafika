@@ -113,6 +113,14 @@ namespace cagd
         connect(_side_widget->join_btn, SIGNAL(released()), _gl_widget, SLOT(call_join_patch()));
         connect(_side_widget->merge_btn, SIGNAL(released()), _gl_widget, SLOT(call_merge_patch()));
 
+        // translacio x, y, z iranyokba
+        connect(_side_widget->plus_X_btn, SIGNAL(pressed()), _gl_widget, SLOT(plus_X()));
+        connect(_side_widget->minus_X_btn, SIGNAL(pressed()), _gl_widget, SLOT(minus_X()));
+        connect(_side_widget->plus_Y_btn, SIGNAL(pressed()), _gl_widget, SLOT(plus_Y()));
+        connect(_side_widget->minus_Y_btn, SIGNAL(pressed()), _gl_widget, SLOT(minus_Y()));
+        connect(_side_widget->plus_Z_btn, SIGNAL(pressed()), _gl_widget, SLOT(plus_Z()));
+        connect(_side_widget->minus_Z_btn, SIGNAL(pressed()), _gl_widget, SLOT(minus_Z()));
+
     }
 
     //--------------------------------
