@@ -5,14 +5,18 @@ using namespace std;
 
 HermiteCompositeSurface3::HermiteCompositeSurface3()
 {
-
+    _patches.reserve(100);
 }
 
 HermiteCompositeSurface3::PatchAttributes::PatchAttributes()
 {
+
     _patch      = nullptr;
     _img        = nullptr;
+    _selected_material   = nullptr;
     _material   = &MatFBGold;
+    _visited    = false;
+    _index      = 0;
 
     ShaderProgram _two_sided_lighting;
     _two_sided_lighting.InstallShaders("Shaders/two_sided_lighting.vert", "Shaders/two_sided_lighting.frag", GL_TRUE);
@@ -42,7 +46,11 @@ GLboolean HermiteCompositeSurface3::RenderAll() const
             return GL_FALSE;
         }
         glEnable(GL_LIGHTING);
+        if(_patches[i]._selected_material!=nullptr){
+            _patches[i]._selected_material->Apply();
+        }else{
             _patches[i]._material->Apply();
+        }
             _patches[i]._shader->Enable();
             _patches[i]._img->Render();
             _patches[i]._shader->Disable();
@@ -57,7 +65,9 @@ GLboolean HermiteCompositeSurface3::InsertIsolatedPatch(vector<DCoordinate3> cor
 
     _patches.resize(n + 1);
 
+
     _patches[n]._patch = new HermitePatch();
+    _patches[n]._index = n;
 
     _patches[n]._patch->SetCorner(0, 0, corners[0]);
     _patches[n]._patch->SetCorner(0, 1, corners[1]);
@@ -414,6 +424,7 @@ GLboolean HermiteCompositeSurface3::JoinTwoPatches(GLuint patch1, GLuint patch2,
     GLuint n = _patches.size();
     _patches.resize(n + 1);
     _patches[n]._patch = new HermitePatch();
+    _patches[n]._index = n;
 
     switch (dir2) {
         case 0:
@@ -600,12 +611,26 @@ GLboolean HermiteCompositeSurface3::SetTransX(GLuint index, GLdouble x)
     _patches[index]._patch->GetCorner(0, 1)[0] += x;
     _patches[index]._patch->GetCorner(1, 0)[0] += x;
     _patches[index]._patch->GetCorner(1, 1)[0] += x;
-    // kiegesziteni... ne csak index. patchet mozgatni, hanem neki szomszedait,s nekik szomszedait, stb...
+
+    _patches[index]._visited = true;
+
+    for(int i = 0; i < 8; i++)
+    {
+        if(_patches[index]._neighbours[i] != nullptr && _patches[index]._neighbours[i]->_visited!=true)
+        {
+            GLuint ind = _patches[index]._neighbours[i]->_index;
+            cout<<"Index "<<index<<" i="<<i<< " ind=" << ind <<endl;
+            SetTransX(ind, x);
+        }
+    }
+
+    _patches[index]._visited = false;
 
     GenerateImagesOfAllPatches();
 
     return GL_TRUE;
 }
+
 
 GLboolean HermiteCompositeSurface3::SetTransY(GLuint index, GLdouble y)
 {
@@ -619,7 +644,19 @@ GLboolean HermiteCompositeSurface3::SetTransY(GLuint index, GLdouble y)
     _patches[index]._patch->GetCorner(0, 1)[1] += y;
     _patches[index]._patch->GetCorner(1, 0)[1] += y;
     _patches[index]._patch->GetCorner(1, 1)[1] += y;
-    // kiegesziteni... ne csak index. patchet mozgatni, hanem neki szomszedait,s nekik szomszedait, stb...
+
+    _patches[index]._visited = true;
+
+    for(int i = 0; i < 8; i++)
+    {
+        if(_patches[index]._neighbours[i] != nullptr && _patches[index]._neighbours[i]->_visited!=true)
+        {
+            GLuint ind = _patches[index]._neighbours[i]->_index;
+            SetTransY(ind, y);
+        }
+    }
+
+    _patches[index]._visited = false;
 
     GenerateImagesOfAllPatches();
 
@@ -638,7 +675,19 @@ GLboolean HermiteCompositeSurface3::SetTransZ(GLuint index, GLdouble z)
     _patches[index]._patch->GetCorner(0, 1)[2] += z;
     _patches[index]._patch->GetCorner(1, 0)[2] += z;
     _patches[index]._patch->GetCorner(1, 1)[2] += z;
-    // kiegesziteni... ne csak index. patchet mozgatni, hanem neki szomszedait,s nekik szomszedait, stb...
+
+    _patches[index]._visited = true;
+
+    for(int i = 0; i < 8; i++)
+    {
+        if(_patches[index]._neighbours[i] != nullptr && _patches[index]._neighbours[i]->_visited!=true)
+        {
+            GLuint ind = _patches[index]._neighbours[i]->_index;
+            SetTransZ(ind, z);
+        }
+    }
+
+    _patches[index]._visited = false;
 
     GenerateImagesOfAllPatches();
 

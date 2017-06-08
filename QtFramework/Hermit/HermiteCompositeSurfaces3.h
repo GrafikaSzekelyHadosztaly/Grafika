@@ -18,7 +18,10 @@ namespace cagd {
                 HermitePatch        *_patch;
                 TriangulatedMesh3   *_img;
                 Material            *_material;
+                //Material            *_selected_material;
                 ShaderProgram       *_shader;
+                bool                _visited;
+                GLuint              _index;
 
                 vector<PatchAttributes *>  _neighbours; // 8
 

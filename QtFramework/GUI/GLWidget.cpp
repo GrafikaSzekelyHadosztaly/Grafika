@@ -1230,8 +1230,10 @@ namespace cagd
     void GLWidget::set_patch1_index(int value)
     {
         if(_patch1_index != value)
-        {
+        {   //visszaallit material
+            //meghiv fuggveny, amely nullptr-e allitja a _patch1_index-en levo patch _selected_material-jat
             _patch1_index = value;
+            //beallit kivalasztott szine
         }
     }
 
