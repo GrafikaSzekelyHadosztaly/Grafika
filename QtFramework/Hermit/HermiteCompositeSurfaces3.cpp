@@ -115,6 +115,12 @@ GLboolean HermiteCompositeSurface3::SetMaterial(GLuint index, Material *material
     return GL_TRUE;
 }
 
+GLboolean HermiteCompositeSurface3::SetSelectedMaterial(GLuint index, Material *selected_material)
+{
+    _patches[index]._selected_material = selected_material;
+    return GL_TRUE;
+}
+
 GLboolean HermiteCompositeSurface3::MergeTwoPatches(GLuint patch1, GLuint patch2, GLuint dir1, GLuint dir2)
 {
     if(_patches[patch1]._neighbours[dir1] != nullptr)

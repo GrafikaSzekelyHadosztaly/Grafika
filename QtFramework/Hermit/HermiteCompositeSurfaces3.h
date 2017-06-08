@@ -18,7 +18,7 @@ namespace cagd {
                 HermitePatch        *_patch;
                 TriangulatedMesh3   *_img;
                 Material            *_material;
-                //Material            *_selected_material;
+                Material            *_selected_material;
                 ShaderProgram       *_shader;
                 bool                _visited;
                 GLuint              _index;
@@ -49,6 +49,7 @@ namespace cagd {
             GLboolean SetAttributes(GLuint index, ShaderProgram *shader, Material *material);
             GLboolean SetShader(GLuint index, ShaderProgram *shader);
             GLboolean SetMaterial(GLuint index, Material *material);
+            GLboolean SetSelectedMaterial(GLuint index, Material *selected_material);
 
             // _patches._patch[ind1] es _patches._patch[ind2] osszemosasa adott iranyoknak
             GLboolean MergeTwoPatches(GLuint index1, GLuint index2, GLuint dir1, GLuint dir2);

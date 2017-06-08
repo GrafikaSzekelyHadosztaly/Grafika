@@ -546,11 +546,15 @@ namespace cagd
                 _shader_index = 0;
                 _material_index = 0;
                 _patch1_index = 0;
-                _patch2_index = 0;
+                //_hermite_surface->SetSelectedMaterial(_patch1_index,&MatFBRuby);
+                _patch2_index = 1;
+                //_hermite_surface->SetSelectedMaterial(_patch2_index,&MatFBRuby);
                 _dir1 = 0;
                 _dir2 = 0;
 
                 _hermite_surface = new HermiteCompositeSurface3();
+                //_hermite_surface->SetMaterial(_patch1_index,&MatFBRuby);
+                //_hermite_surface->SetSelectedMaterial(_patch2_index,&MatFBRuby);
 
                 vector<DCoordinate3> corners;
                 corners.resize(4);
@@ -597,7 +601,8 @@ namespace cagd
                 twists[3] = twists3;
 
                 _hermite_surface->InsertIsolatedPatch(corners, uTangents, vTangents, twists);
-                _hermite_surface->SetAttributes(0, &_two_sided_lighting, &MatFBBrass);
+                _hermite_surface->SetAttributes(0, &_two_sided_lighting, &MatFBGold);
+                _hermite_surface->SetSelectedMaterial(0,&MatFBRuby);
 
                 DCoordinate3 corners01(-1.0, -1.0, 0.0);
                 DCoordinate3 corners11(-1.0, +0.0, 0.0);
@@ -638,7 +643,8 @@ namespace cagd
                 //read_patch(0);
 
                 _hermite_surface->InsertIsolatedPatch(corners, uTangents, vTangents, twists);
-                _hermite_surface->SetAttributes(1, &_two_sided_lighting, &MatFBEmerald);
+                _hermite_surface->SetAttributes(1, &_two_sided_lighting, &MatFBGold);
+                _hermite_surface->SetSelectedMaterial(1,&MatFBPearl);
 
                 //_hermite_surface->MergeTwoPatches(0, 1, 4, 0);
                 //_hermite_surface->JoinTwoPatches(0, 1, 4, 0);
@@ -1196,16 +1202,16 @@ namespace cagd
         case 3:
             _hermite_surface->SetMaterial(_patch_index, &MatFBEmerald);
             break;
-        case 4:
+        /*case 4:
             _hermite_surface->SetMaterial(_patch_index, &MatFBPearl);
             break;
         case 5:
             _hermite_surface->SetMaterial(_patch_index, &MatFBRuby);
-            break;
-        case 6:
+            break;*/
+        case 4:
             _hermite_surface->SetMaterial(_patch_index, &MatFBTurquoise);
             break;
-        case 7:
+        case 5:
             _hermite_surface->SetMaterial(_patch_index, &MatFBBrass);
             break;
         }
@@ -1230,10 +1236,13 @@ namespace cagd
     void GLWidget::set_patch1_index(int value)
     {
         if(_patch1_index != value)
-        {   //visszaallit material
-            //meghiv fuggveny, amely nullptr-e allitja a _patch1_index-en levo patch _selected_material-jat
+        {
+            if(_patch1_index != _patch2_index)
+            {
+                _hermite_surface->SetSelectedMaterial(_patch1_index,nullptr);
+            }
             _patch1_index = value;
-            //beallit kivalasztott szine
+            _hermite_surface->SetSelectedMaterial(_patch1_index,&MatFBRuby);
         }
     }
 
@@ -1241,7 +1250,12 @@ namespace cagd
     {
         if(_patch2_index != value)
         {
+            if(_patch1_index != _patch2_index)
+            {
+                _hermite_surface->SetSelectedMaterial(_patch2_index,nullptr);
+            }
             _patch2_index = value;
+            _hermite_surface->SetSelectedMaterial(_patch2_index,&MatFBPearl);
         }
     }
 

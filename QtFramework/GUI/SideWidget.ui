@@ -450,16 +450,6 @@
     </item>
     <item>
      <property name="text">
-      <string>Pearl</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Ruby</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
       <string>Turquoise</string>
      </property>
     </item>
@@ -574,6 +564,9 @@
      <width>42</width>
      <height>22</height>
     </rect>
+   </property>
+   <property name="value">
+    <number>1</number>
    </property>
   </widget>
   <widget class="QGroupBox" name="groupBox_2">
