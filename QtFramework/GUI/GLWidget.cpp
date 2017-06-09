@@ -1235,11 +1235,18 @@ namespace cagd
 
     void GLWidget::set_patch1_index(int value)
     {
-        if(_patch1_index != value)
+        if(value >= (int)_hermite_surface->GetNumberOfPatches())
         {
-            if(_patch1_index != _patch2_index)
+            _hermite_surface->SetSelectedMaterial(_patch1_index,nullptr);
+            _patch1_index = value;
+        }
+        else if(_patch1_index != value)
+        {
+            _hermite_surface->SetSelectedMaterial(_patch1_index,nullptr);
+
+            if(_patch1_index == _patch2_index)
             {
-                _hermite_surface->SetSelectedMaterial(_patch1_index,nullptr);
+                _hermite_surface->SetSelectedMaterial(_patch2_index,&MatFBPearl);
             }
             _patch1_index = value;
             _hermite_surface->SetSelectedMaterial(_patch1_index,&MatFBRuby);
@@ -1248,11 +1255,18 @@ namespace cagd
 
     void GLWidget::set_patch2_index(int value)
     {
-        if(_patch2_index != value)
+        if(value >= (int)_hermite_surface->GetNumberOfPatches())
         {
-            if(_patch1_index != _patch2_index)
+            _hermite_surface->SetSelectedMaterial(_patch2_index,nullptr);
+            _patch2_index = value;
+        }
+        else if(_patch2_index != value)
+        {
+            _hermite_surface->SetSelectedMaterial(_patch2_index,nullptr);
+
+            if(_patch1_index == _patch2_index)
             {
-                _hermite_surface->SetSelectedMaterial(_patch2_index,nullptr);
+                _hermite_surface->SetSelectedMaterial(_patch1_index,&MatFBRuby);
             }
             _patch2_index = value;
             _hermite_surface->SetSelectedMaterial(_patch2_index,&MatFBPearl);

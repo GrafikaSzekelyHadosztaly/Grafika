@@ -117,8 +117,13 @@ GLboolean HermiteCompositeSurface3::SetMaterial(GLuint index, Material *material
 
 GLboolean HermiteCompositeSurface3::SetSelectedMaterial(GLuint index, Material *selected_material)
 {
-    _patches[index]._selected_material = selected_material;
-    return GL_TRUE;
+    if(index < GetNumberOfPatches())
+    {
+        _patches[index]._selected_material = selected_material;
+        return GL_TRUE;
+    }
+
+    return GL_FALSE;
 }
 
 GLboolean HermiteCompositeSurface3::MergeTwoPatches(GLuint patch1, GLuint patch2, GLuint dir1, GLuint dir2)
@@ -625,7 +630,6 @@ GLboolean HermiteCompositeSurface3::SetTransX(GLuint index, GLdouble x)
         if(_patches[index]._neighbours[i] != nullptr && _patches[index]._neighbours[i]->_visited!=true)
         {
             GLuint ind = _patches[index]._neighbours[i]->_index;
-            cout<<"Index "<<index<<" i="<<i<< " ind=" << ind <<endl;
             SetTransX(ind, x);
         }
     }
