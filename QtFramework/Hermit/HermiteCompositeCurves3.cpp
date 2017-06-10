@@ -401,6 +401,10 @@ GLboolean HermiteCompositeCurve::PlusFromRight(GLuint index_of_arc)
     {
         return GL_FALSE;
     }
+    if(_arcs[index_of_arc].next != nullptr){
+        cout << "The selected direction is no free!\n";
+        return GL_FALSE;
+    }
 
     GLuint size = _arcs.size();
 
@@ -430,6 +434,10 @@ GLboolean HermiteCompositeCurve::PlusFromLeft(GLuint index_of_arc)
 {
     if (index_of_arc >= _arcs.size() || !_arcs[index_of_arc].arc || _arcs[index_of_arc].previous!=nullptr)
     {
+        return GL_FALSE;
+    }
+    if(_arcs[index_of_arc].previous != nullptr){
+        cout << "The selected direction is no free!\n";
         return GL_FALSE;
     }
 
