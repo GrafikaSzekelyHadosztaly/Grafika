@@ -69,7 +69,7 @@ GLboolean HermiteCompositeCurve::InsertIsolatedCurve(vector<DCoordinate3> corner
     return GL_TRUE;
 }
 
-GLboolean HermiteCompositeCurve::RenderAll(GLboolean elso, GLboolean masod){
+GLboolean HermiteCompositeCurve::RenderAll(GLboolean der1, GLboolean der2){
     for(GLuint i = 0;i < _arcs.size();i++)
     {
         if (!_arcs[i].image )//|| !_attributes[x].material)// || !_attributes[x].shader)
@@ -83,13 +83,13 @@ GLboolean HermiteCompositeCurve::RenderAll(GLboolean elso, GLboolean masod){
          _arcs[i].image->RenderDerivatives(0,GL_LINE_STRIP);
 
 
-         if (elso) {
+         if (der1) {
              glColor3f(0.0,0.5,0.0);
             _arcs[i].image ->RenderDerivatives(1,GL_LINES);
             _arcs[i].image ->RenderDerivatives(1,GL_POINTS);
          }
 
-         if (masod) {
+         if (der2) {
             glColor3f(0.1,0.5,0.9);
             _arcs[i].image ->RenderDerivatives(2,GL_LINES);
             _arcs[i].image ->RenderDerivatives(2,GL_POINTS);
@@ -467,17 +467,17 @@ GLboolean HermiteCompositeCurve::PlusFromLeft(GLuint index_of_arc)
 
     DCoordinate3 p1 = *new DCoordinate3();
     p1 = _arcs[index_of_arc].arc->GetData(0);
-    _arcs[size].arc->SetData(0, p1);
+    _arcs[size].arc->SetData(1, p1);
 
     p1 = _arcs[index_of_arc].arc->GetData(2);
-    _arcs[size].arc->SetData(2, -p1);
+    _arcs[size].arc->SetData(3, p1);
 
     p1 = _arcs[index_of_arc].arc->GetData(0);
     p1 = 2* p1 - _arcs[index_of_arc].arc->GetData(1);
-    _arcs[size].arc->SetData(1,p1);
+    _arcs[size].arc->SetData(0,p1);
 
     p1 = _arcs[index_of_arc].arc->GetData(3);
-    _arcs[size].arc->SetData(3,-p1);
+    _arcs[size].arc->SetData(2,p1);
 
     _arcs[index_of_arc].previous = &_arcs[size];
     _arcs[size].next = &_arcs[index_of_arc];

@@ -23,7 +23,6 @@ public:
                       DCoordinate3    color;
                       ArcAttributes   *next;
                       ArcAttributes   *previous;
-                      //konstruktor
 
                       ArcAttributes()
                       {
@@ -40,10 +39,9 @@ protected:
             std::vector<ArcAttributes>  _arcs;
 public:
 
-            //GLboolean SetDefaultData(GLuint arc_index, GLuint u_div_point_count,GLuint max_order_of_derivatives);
             GLboolean InsertNewArc();
             GLboolean InsertNewArc(HermiteArc* curve);
-            GLboolean RenderAll(GLboolean elso = GL_FALSE, GLboolean masod = GL_FALSE);
+            GLboolean RenderAll(GLboolean der1 = GL_FALSE, GLboolean der2 = GL_FALSE);
             GLboolean GenerateImageOfSelectedCurve(GLuint arc_index);
             GLboolean GenerateImageOfCurves();
             GLboolean SetArcTransX(GLdouble x, GLuint index_of_arc);

@@ -171,6 +171,10 @@ namespace cagd
 
         //curve kiirasa a file-ba
         connect(_side_widget->write_curve_btn, SIGNAL(released()), _gl_widget, SLOT(call_write_curve()));
+        //DERIVATIVES _cb_der1 _cb_der2
+        connect(_side_widget->_cb_der1,SIGNAL(clicked(bool)),_gl_widget,SLOT(set_der1(bool)) );
+        connect(_side_widget->_cb_der2,SIGNAL(clicked(bool)),_gl_widget,SLOT(set_der2(bool)) );
+
 
     }
 

@@ -713,8 +713,8 @@ namespace cagd
                 _hermit_cmp_curve = new HermiteCompositeCurve();
                 _hermit_cmp_curve->InsertNewArc(arc1);
                 _hermit_cmp_curve->InsertNewArc(arc2);
-                _hermit_cmp_curve->PlusFromRight(1);
-                _hermit_cmp_curve->PlusFromLeft(0);
+                //_hermit_cmp_curve->PlusFromRight(1);
+                //_hermit_cmp_curve->PlusFromLeft(0);
 
                 //_hermit_cmp_curve->PlusFromRight(1);
                 //_hermit_cmp_curve->PlusFromLeft(0);
@@ -728,8 +728,8 @@ namespace cagd
                 //_hermit_cmp_curve->Merge(0,1,2);//bal ballal
                // _hermit_cmp_curve->Merge(0,1,3);//bal jobbal
                 _hermit_cmp_curve->SetColor(0,0,1,0);
-                _hermit_cmp_curve->PlusFromLeft(0);
-                _hermit_cmp_curve->PlusFromRight(0);
+                //_hermit_cmp_curve->PlusFromLeft(0);
+                //_hermit_cmp_curve->PlusFromRight(0);
 
                 //_hermit_cmp_curve->PlusFromRight(1);
 
@@ -761,6 +761,8 @@ namespace cagd
                 B = 1;
                 _arc_vector_index = 0;
                 _arc_vector_nr_index = 0;
+                der1 = false;
+                der2 = false;
             }
 
         }
@@ -1055,7 +1057,7 @@ namespace cagd
                 glPopMatrix();
                 // iranytu_vege
 
-                _hermit_cmp_curve->RenderAll();
+                _hermit_cmp_curve->RenderAll(der1, der2);
             }
 
         // pops the current matrix stack, replacing the current matrix with the one below it on the stack,
@@ -1899,4 +1901,21 @@ namespace cagd
             cout << "Curve index " << index_of_curve << " does not exist!" << endl;
         }
     }
+    void GLWidget::set_der1(bool value)
+    {
+        if(value != der1)
+        {
+            der1 = value;
+            updateGL();
+        }
+    }
+    void GLWidget::set_der2(bool value)
+    {
+        if(value != der2)
+        {
+            der2 = value;
+            updateGL();
+        }
+    }
+
 }
