@@ -1,5 +1,5 @@
 #include "Hermit/HermiteCompositeSurfaces3.h"
-#include <fstream>
+
 
 using namespace cagd;
 using namespace std;

@@ -719,6 +719,19 @@
        <string>nr</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="write_curve_btn">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>60</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Write to file</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QGroupBox" name="groupBox_8">
      <property name="geometry">

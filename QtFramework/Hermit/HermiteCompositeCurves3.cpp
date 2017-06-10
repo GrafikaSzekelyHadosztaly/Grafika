@@ -48,6 +48,27 @@ GLboolean HermiteCompositeCurve::InsertNewArc(HermiteArc *curve)
     return GenerateImageOfSelectedCurve(size);
 }
 
+GLboolean HermiteCompositeCurve::InsertIsolatedCurve(vector<DCoordinate3> corners, vector<DCoordinate3> tangents)
+{// const &
+    GLuint n = _arcs.size();
+
+    _arcs.resize(n + 1);
+
+    _arcs[n]._arc = new HermiteArc();
+
+    _arcs[n].->arc->SetData(0, corners[0]);
+    _arcs[n].->arc->SetData(1, corners[1]);
+
+    _arcs[n].->arc->SetData(2, tangents[0]);
+    _arcs[n].->arc->SetData(3, tangents[1]);
+
+    GenerateImageOfCurves();
+
+    RenderAll();
+
+    return GL_TRUE;
+}
+
 GLboolean HermiteCompositeCurve::RenderAll(GLboolean elso, GLboolean masod){
     for(GLuint i = 0;i < _arcs.size();i++)
     {
@@ -757,6 +778,42 @@ GLboolean HermiteCompositeCurve::SetColor(GLuint index_of_arc, float r, float g,
     }
     _arcs[index_of_arc].color = *new DCoordinate3(r,g,b);
 }
+
+
+void HermiteCompositeCurve::writeToFile_curve(GLuint i){
+    string filename;
+    int j = -1;
+
+    ifstream file1;
+    do
+    {
+        j++;
+        if(j < 10)
+            filename = "Curves/curve0" + to_string(j) + ".txt";
+        else
+            filename = "Curves/curve" + to_string(j) + ".txt";
+        file1.close();
+        file1.open(filename);
+    }while(file1.good());
+
+    file1.close();
+
+    ofstream file(filename);
+    DCoordinate3 out_data;
+
+    out_data = _arcs[i].arc->GetData(0);
+    file << out_data[0] << " " << out_data[1] << " " << out_data[2] << endl;
+    out_data = _arcs[i].arc->GetData(1);
+    file << out_data[0] << " " << out_data[1] << " " << out_data[2] << endl;
+    out_data = _arcs[i].arc->GetData(2);
+    file << out_data[0] << " " << out_data[1] << " " << out_data[2] << endl;
+    out_data = _arcs[i].arc->GetData(3);
+    file << out_data[0] << " " << out_data[1] << " " << out_data[2] << endl;
+
+    file.close();
+}
+
+
 
 HermiteCompositeCurve::~HermiteCompositeCurve(){
     for (GLuint i = 0;i<_arcs.size();i++)

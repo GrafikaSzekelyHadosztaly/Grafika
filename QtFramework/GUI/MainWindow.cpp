@@ -169,6 +169,8 @@ namespace cagd
         // _btn_Color
         connect(_side_widget->_btn_Color, SIGNAL(pressed()), _gl_widget, SLOT(set_curve_color()));
 
+        //curve kiirasa a file-ba
+        connect(_side_widget->write_curve_btn, SIGNAL(released()), _gl_widget, SLOT(call_write_curve()));
 
     }
 

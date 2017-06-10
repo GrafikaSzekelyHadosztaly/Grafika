@@ -1206,6 +1206,7 @@ namespace cagd
         read_patch(_file_index);
     }
 
+
     GLboolean GLWidget::read_patch(GLuint i)
     {
         string filename;
@@ -1289,6 +1290,54 @@ namespace cagd
 
         return GL_TRUE;
     }
+
+    void GLWidget::call_read_curve()
+    {
+        read_curve(_file_index);
+    }
+
+    GLboolean GLWidget::read_curve(GLuint i)
+    {
+        string filename;
+        if(i < 10)
+            filename = "Curves/curve0" + to_string(i) + ".txt";
+        else
+            filename = "Curves/curve" + to_string(i) + ".txt";
+
+        ifstream file(filename);
+        if(!file.good())
+        {
+            cout << "Curve file " << filename<< " does not exist" << endl;
+            return GL_FALSE;
+        }
+
+        float x, y, z;
+
+        vector<DCoordinate3> corners;
+        corners.resize(2);
+        file >> x >> y >> z;
+        DCoordinate3 corners0(x, y, z);
+        file >> x >> y >> z;
+        DCoordinate3 corners1(x, y, z);
+        corners[0] = corners0;
+        corners[1] = corners1;
+
+        vector<DCoordinate3> tangents;
+        uTangents.resize(2);
+        file >> x >> y >> z;
+        DCoordinate3 tangents0(x, y, z);
+        file >> x >> y >> z;
+        DCoordinate3 tangents1(x, y, z);
+        tangents[0] = tangents0;
+        tangents[1] = tangents1;
+
+        _hermit_cmp_curve->InsertIsolatedCurve(corners, uTangents);
+
+        file.close();
+
+        return GL_TRUE;
+    }
+
 
     void GLWidget::call_write_patch(){
         if(_patch_index < _hermite_surface->GetNumberOfPatches()){
@@ -1840,5 +1889,14 @@ namespace cagd
     GLboolean GLWidget::call_join_curve(){
 
         return GL_TRUE;
+    }
+
+    void GLWidget::call_write_curve(){
+        if(index_of_curve < _hermit_cmp_curve->GetSizeOfArcs()) {
+            _hermit_cmp_curve->writeToFile_curve(index_of_curve);
+        }
+        else{
+            cout << "Curve index " << index_of_curve << " does not exist!" << endl;
+        }
     }
 }

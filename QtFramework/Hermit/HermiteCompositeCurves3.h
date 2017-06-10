@@ -7,6 +7,7 @@
 #include "../Core/Colors4.h"
 #include "../Core/GenericCurves3.h"
 #include "../Hermit/HermiteArcs3.h"
+#include <fstream>
 
 using namespace cagd;
 class HermiteCompositeCurve
@@ -66,9 +67,9 @@ public:
             GLboolean JoinFromLeft(GLuint attribute_index_1, GLuint attribute_index_2);
             GLboolean JoinCurves(GLuint index_of_arc_1, GLuint index_of_arc_2, GLuint case_nr);
 
-            GLboolean SetColor(GLuint index_of_arc, float r, float g, float b);
+            GLboolean SetColor(GLuint index_of_arc, float r, float g, float b);           
             GLuint GetSizeOfArcs();
-
+            void writeToFile_curve(GLuint i);
             ~HermiteCompositeCurve();
 
 };

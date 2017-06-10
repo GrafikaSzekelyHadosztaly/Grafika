@@ -169,6 +169,14 @@ namespace cagd
         GLboolean read_patch(GLuint i);
 
         void call_write_patch();
+
+        // curve olvasa es irasa allomanyba
+
+        void call_write_curve();
+
+        void call_read_curve();
+        GLboolean read_curve(GLuint index);
+
         // patch attributumok valtoztatasa
         void set_patch_index(int);
         GLboolean set_shader_index(int);
