@@ -118,6 +118,12 @@ namespace cagd
         GenericCurve3           *_arc_test_img;
         HermiteCompositeCurve   *_hermit_cmp_curve;
 
+        // CURVES MANIPULATION STUFF
+        GLuint      index_of_curve;
+        float       R;
+        float       G;
+        float       B;
+
 
     //protected:
 
@@ -164,6 +170,20 @@ namespace cagd
         void set_direction2(int);
         void set_patch1_index(int);
         void set_patch2_index(int);
+
+        //CURVE MANIPLUATION
+        void set_index_of_curve(int);
+        void set_pb_Y_up();
+        void set_pb_Y_down();
+        void set_pb_X_up();
+        void set_pb_X_down();
+        void set_pb_Z_up();
+        void set_pb_Z_down();
+        void set_R(double);
+        void set_G(double);
+        void set_B(double);
+        void set_curve_color();
+
         GLboolean call_extend_patch();
         GLboolean call_extend_new_patch();
         GLboolean call_join_patch();
