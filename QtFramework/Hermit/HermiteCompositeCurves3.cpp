@@ -26,6 +26,10 @@ GLboolean HermiteCompositeCurve::InsertNewArc()
     return GL_TRUE;
 }
 
+GLuint HermiteCompositeCurve::GetSizeOfArcs(){
+    return _arcs.size();
+}
+
 GLboolean HermiteCompositeCurve::InsertNewArc(HermiteArc *curve)
 {
     GLuint size = _arcs.size();
@@ -417,6 +421,7 @@ GLboolean HermiteCompositeCurve::PlusFromRight(GLuint index_of_arc)
     _arcs[size].arc->SetData(3,p1);
 
     _arcs[index_of_arc].next = &_arcs[size];
+    _arcs[size].previous = &_arcs[index_of_arc];
 
     return GenerateImageOfCurves();
 }
@@ -446,6 +451,7 @@ GLboolean HermiteCompositeCurve::PlusFromLeft(GLuint index_of_arc)
     _arcs[size].arc->SetData(3,-p1);
 
     _arcs[index_of_arc].previous = &_arcs[size];
+    _arcs[size].next = &_arcs[index_of_arc];
 
     return GenerateImageOfCurves();
 }
