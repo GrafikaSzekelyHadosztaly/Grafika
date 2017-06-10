@@ -118,6 +118,12 @@ namespace cagd
         GenericCurve3           *_arc_test_img;
         HermiteCompositeCurve   *_hermit_cmp_curve;
 
+        // hermite change indexes
+        GLuint _selected_curve1;
+        GLuint _selected_curve2;
+        GLuint _direction1;
+        GLuint _direction2;
+
 
     //protected:
 
@@ -184,6 +190,17 @@ namespace cagd
         GLboolean _zValue_changed(double);
 
         GLboolean _change_bt_clicked();
+
+        //gorbe modositasa
+        GLboolean curve1_index_spin_changed(int);
+        GLboolean curve2_index_spin_changed(int);
+        GLboolean direction1_combo_changed(int);
+        GLboolean direction2_combo_changed(int);
+        GLboolean call_extend_curve();
+        GLboolean call_merge_curve();
+        GLboolean call_join_curve();
+
+
     private slots:
         void _animate();
     };

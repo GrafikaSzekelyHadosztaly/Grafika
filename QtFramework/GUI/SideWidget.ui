@@ -668,7 +668,7 @@
      <property name="title">
       <string>Curve operations</string>
      </property>
-     <widget class="QSpinBox" name="spinBox_2">
+     <widget class="QSpinBox" name="curve1_index_spin">
       <property name="geometry">
        <rect>
         <x>60</x>
@@ -678,7 +678,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QSpinBox" name="spinBox_3">
+     <widget class="QSpinBox" name="curve2_index_spin">
       <property name="geometry">
        <rect>
         <x>60</x>
@@ -740,7 +740,7 @@
        <string>Dir 2:</string>
       </property>
      </widget>
-     <widget class="QComboBox" name="comboBox_4">
+     <widget class="QComboBox" name="dir1_combo">
       <property name="geometry">
        <rect>
         <x>50</x>
@@ -749,8 +749,18 @@
         <height>22</height>
        </rect>
       </property>
+      <item>
+       <property name="text">
+        <string>Left</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Right</string>
+       </property>
+      </item>
      </widget>
-     <widget class="QComboBox" name="comboBox_5">
+     <widget class="QComboBox" name="dir2_combo">
       <property name="geometry">
        <rect>
         <x>50</x>
@@ -759,8 +769,18 @@
         <height>22</height>
        </rect>
       </property>
+      <item>
+       <property name="text">
+        <string>Left</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Right</string>
+       </property>
+      </item>
      </widget>
-     <widget class="QPushButton" name="pushButton_13">
+     <widget class="QPushButton" name="extend_btn_2">
       <property name="geometry">
        <rect>
         <x>160</x>
@@ -770,10 +790,10 @@
        </rect>
       </property>
       <property name="text">
-       <string>PushButton</string>
+       <string>Extend C1</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_14">
+     <widget class="QPushButton" name="merge_btn_2">
       <property name="geometry">
        <rect>
         <x>160</x>
@@ -783,10 +803,10 @@
        </rect>
       </property>
       <property name="text">
-       <string>PushButton</string>
+       <string>Merge</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_15">
+     <widget class="QPushButton" name="join_btn_2">
       <property name="geometry">
        <rect>
         <x>160</x>
@@ -796,7 +816,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>PushButton</string>
+       <string>Join</string>
       </property>
      </widget>
     </widget>

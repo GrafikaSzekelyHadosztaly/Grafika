@@ -135,6 +135,13 @@ namespace cagd
 
         connect(_side_widget->_change_bt, SIGNAL(pressed()), _gl_widget, SLOT(_change_bt_clicked()));
 
+        // curve extend, merge es join parancsok
+        connect(_side_widget->curve1_index_spin, SIGNAL(valueChanged(int)), _gl_widget, SLOT(curve1_index_spin_changed(int)));
+        connect(_side_widget->curve2_index_spin, SIGNAL(valueChanged(int)), _gl_widget, SLOT(curve2_index_spin_changed(int)));
+        connect(_side_widget->dir1_combo, SIGNAL(currentIndexChanged(int)), _gl_widget, SLOT(direction1_combo_changed(int)));
+        connect(_side_widget->dir2_combo, SIGNAL(currentIndexChanged(int)), _gl_widget, SLOT(direction2_combo_changed(int)));
+
+
     }
 
 
