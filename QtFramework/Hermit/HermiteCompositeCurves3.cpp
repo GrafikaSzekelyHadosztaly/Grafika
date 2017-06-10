@@ -446,17 +446,17 @@ GLboolean HermiteCompositeCurve::PlusFromLeft(GLuint index_of_arc)
 
     DCoordinate3 p1 = *new DCoordinate3();
     p1 = _arcs[index_of_arc].arc->GetData(0);
-    _arcs[size].arc->SetData(0, p1);
+    _arcs[size].arc->SetData(1, p1);
 
     p1 = _arcs[index_of_arc].arc->GetData(2);
-    _arcs[size].arc->SetData(2, -p1);
+    _arcs[size].arc->SetData(3, p1);
 
     p1 = _arcs[index_of_arc].arc->GetData(0);
     p1 = 2* p1 - _arcs[index_of_arc].arc->GetData(1);
-    _arcs[size].arc->SetData(1,p1);
+    _arcs[size].arc->SetData(0,p1);
 
     p1 = _arcs[index_of_arc].arc->GetData(3);
-    _arcs[size].arc->SetData(3,-p1);
+    _arcs[size].arc->SetData(2,p1);
 
     _arcs[index_of_arc].previous = &_arcs[size];
     _arcs[size].next = &_arcs[index_of_arc];
