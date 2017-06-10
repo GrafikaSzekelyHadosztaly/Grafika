@@ -351,6 +351,10 @@ GLboolean HermiteCompositeCurve::JoinFromRight(GLuint index_of_arc_1, GLuint ind
         return GL_FALSE;
     }
 
+    if(_arcs[index_of_arc_2].previous != nullptr || _arcs[index_of_arc_1].next != nullptr){
+        return GL_FALSE;
+    }
+
     GLuint size = _arcs.size();
     InsertNewArc();
     _arcs.resize(size + 1);
@@ -362,7 +366,13 @@ GLboolean HermiteCompositeCurve::JoinFromRight(GLuint index_of_arc_1, GLuint ind
 
     _arcs[size].arc->SetData(3, _arcs[index_of_arc_2].arc->GetData(2));
 
-    return GL_TRUE;
+    _arcs[size].previous = &_arcs[index_of_arc_1];
+    _arcs[size].next = &_arcs[index_of_arc_2];
+
+    _arcs[index_of_arc_1].next = &_arcs[size];
+    _arcs[index_of_arc_2].previous = &_arcs[size];
+
+    return GenerateImageOfCurves();
 }
 
 GLboolean HermiteCompositeCurve::JoinFromLeft(GLuint index_of_arc_1, GLuint index_of_arc_2)
@@ -371,6 +381,10 @@ GLboolean HermiteCompositeCurve::JoinFromLeft(GLuint index_of_arc_1, GLuint inde
         index_of_arc_2 >= _arcs.size() || !_arcs[index_of_arc_2].arc ||
         index_of_arc_1 == index_of_arc_2)
     {
+        return GL_FALSE;
+    }
+
+    if(_arcs[index_of_arc_1].previous != nullptr || _arcs[index_of_arc_2].next != nullptr){
         return GL_FALSE;
     }
 
@@ -385,7 +399,98 @@ GLboolean HermiteCompositeCurve::JoinFromLeft(GLuint index_of_arc_1, GLuint inde
 
     _arcs[size].arc->SetData(3, _arcs[index_of_arc_1].arc->GetData(2));
 
-    return GL_TRUE;
+    _arcs[size].previous = &_arcs[index_of_arc_2];
+    _arcs[size].next = &_arcs[index_of_arc_1];
+
+    _arcs[index_of_arc_2].next = &_arcs[size];
+    _arcs[index_of_arc_1].previous = &_arcs[size];
+
+    return GenerateImageOfCurves();
+}
+
+GLboolean HermiteCompositeCurve::JoinCurves(GLuint index_of_arc_1, GLuint index_of_arc_2, GLuint case_nr){
+    //case_nr - if 0 right to left
+    //          if 1 right to right
+    //          if 2 left to left
+    //          if 3 left to right
+
+    if(index_of_arc_1 >= _arcs.size() || !_arcs[index_of_arc_1].arc ||
+            index_of_arc_2 >= _arcs.size() || !_arcs[index_of_arc_2].arc ||
+            index_of_arc_1 == index_of_arc_2 || case_nr > 3){
+        return GL_FALSE;
+    }
+
+
+
+    int left_nr, right_nr;
+
+    switch (case_nr) {
+    case 0:
+        if(_arcs[index_of_arc_1].next != nullptr || _arcs[index_of_arc_2].previous != nullptr){
+            return GL_FALSE;
+        }
+        left_nr = 1;
+        right_nr = 0;
+        break;
+    case 1:
+        if(_arcs[index_of_arc_1].next != nullptr || _arcs[index_of_arc_2].next != nullptr){
+            return GL_FALSE;
+        }
+        left_nr = 1;
+        right_nr = 1;
+        break;
+    case 2:
+        if(_arcs[index_of_arc_1].previous != nullptr || _arcs[index_of_arc_2].previous != nullptr){
+            return GL_FALSE;
+        }
+        left_nr = 0;
+        right_nr = 0;
+        break;
+    case 3:
+        if(_arcs[index_of_arc_1].previous != nullptr || _arcs[index_of_arc_2].next != nullptr){
+            return GL_FALSE;
+        }
+        left_nr = 0;
+        right_nr = 1;
+        break;
+    }
+
+    GLuint size = _arcs.size();
+    InsertNewArc();
+    _arcs.resize(size + 1);
+
+
+
+    _arcs[size].arc->SetData(0, _arcs[index_of_arc_2].arc->GetData(left_nr));
+    _arcs[size].arc->SetData(1, _arcs[index_of_arc_1].arc->GetData(right_nr));
+
+    _arcs[size].arc->SetData(2, _arcs[index_of_arc_2].arc->GetData(left_nr + 2));
+
+    _arcs[size].arc->SetData(3, _arcs[index_of_arc_1].arc->GetData(right_nr + 2));
+
+    _arcs[size].previous = &_arcs[index_of_arc_1];
+    _arcs[size].next = &_arcs[index_of_arc_2];
+
+    switch (case_nr) {
+    case 0:
+        _arcs[index_of_arc_1].next = &_arcs[size];
+        _arcs[index_of_arc_2].previous = &_arcs[size];
+        break;
+    case 1:
+        _arcs[index_of_arc_1].next = &_arcs[size];
+        _arcs[index_of_arc_2].next = &_arcs[size];
+        break;
+    case 2:
+        _arcs[index_of_arc_1].previous = &_arcs[size];
+        _arcs[index_of_arc_2].previous = &_arcs[size];
+        break;
+    case 3:
+        _arcs[index_of_arc_1].previous = &_arcs[size];
+        _arcs[index_of_arc_2].next = &_arcs[size];
+        break;
+    }
+
+    return GenerateImageOfCurves();
 }
 
 HermiteCompositeCurve::~HermiteCompositeCurve(){

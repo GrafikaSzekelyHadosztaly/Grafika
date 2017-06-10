@@ -716,10 +716,17 @@ namespace cagd
                 _hermit_cmp_curve->InsertNewArc(arc2);
                 _hermit_cmp_curve->PlusFromRight(1);
                 _hermit_cmp_curve->PlusFromLeft(0);
-                _hermit_cmp_curve->MergeFromRight(0,1);
+                //_hermit_cmp_curve->MergeFromRight(0,1);
                 //_hermit_cmp_curve->PlusFromRight(0);
                 //_hermit_cmp_curve->PlusFromRight(1);
                 //_hermit_cmp_curve->PlusFromRight(2);
+
+//                _hermit_cmp_curve->JoinCurves(0,1,0);
+//                _hermit_cmp_curve->JoinCurves(0,1,1);
+                _hermit_cmp_curve->JoinCurves(0,1,2);
+                _hermit_cmp_curve->JoinCurves(0,1,3);
+
+//                _hermit_cmp_curve->JoinFromRight(0,1);
             }
 
         }

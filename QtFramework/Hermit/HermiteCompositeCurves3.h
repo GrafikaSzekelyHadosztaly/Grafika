@@ -60,6 +60,7 @@ public:
 
             GLboolean JoinFromRight(GLuint attribute_index_1, GLuint attribute_index_2);
             GLboolean JoinFromLeft(GLuint attribute_index_1, GLuint attribute_index_2);
+            GLboolean JoinCurves(GLuint index_of_arc_1, GLuint index_of_arc_2, GLuint case_nr);
 
             ~HermiteCompositeCurve();
 
