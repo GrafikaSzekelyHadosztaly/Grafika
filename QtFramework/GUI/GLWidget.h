@@ -231,7 +231,7 @@ namespace cagd
         void arc_vector_minus_X();
         void arc_vector_minus_Y();
         void arc_vector_minus_Z();
->>>>>>> d4ef4fe738b4366c96063310c44687cf9d0d3cbc
+
 
 
     private slots:

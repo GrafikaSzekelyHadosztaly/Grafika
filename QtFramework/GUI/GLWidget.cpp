@@ -713,8 +713,8 @@ namespace cagd
                 _hermit_cmp_curve = new HermiteCompositeCurve();
                 _hermit_cmp_curve->InsertNewArc(arc1);
                 _hermit_cmp_curve->InsertNewArc(arc2);
-                _hermit_cmp_curve->PlusFromRight(1);
-                _hermit_cmp_curve->PlusFromLeft(0);
+                //_hermit_cmp_curve->PlusFromRight(1);
+                //_hermit_cmp_curve->PlusFromLeft(0);
 
                 //_hermit_cmp_curve->PlusFromRight(1);
                 //_hermit_cmp_curve->PlusFromLeft(0);
@@ -728,8 +728,8 @@ namespace cagd
                 //_hermit_cmp_curve->Merge(0,1,2);//bal ballal
                // _hermit_cmp_curve->Merge(0,1,3);//bal jobbal
                 _hermit_cmp_curve->SetColor(0,0,1,0);
-                _hermit_cmp_curve->PlusFromLeft(0);
-                _hermit_cmp_curve->PlusFromRight(0);
+                //_hermit_cmp_curve->PlusFromLeft(0);
+                //_hermit_cmp_curve->PlusFromRight(0);
 
                 //_hermit_cmp_curve->PlusFromRight(1);
 
@@ -1055,7 +1055,7 @@ namespace cagd
                 glPopMatrix();
                 // iranytu_vege
 
-                _hermit_cmp_curve->RenderAll();
+                _hermit_cmp_curve->RenderAll(true, false);
             }
 
         // pops the current matrix stack, replacing the current matrix with the one below it on the stack,
@@ -1818,7 +1818,7 @@ namespace cagd
     }
 
     GLboolean GLWidget::call_extend_curve(){
-        GLuint n = size;
+        GLuint n = _hermit_cmp_curve->GetSizeOfArcs();
         if(_selected_curve1 >= n){
             cout << "The selected curve does not exist!\n";
             return GL_FALSE;
