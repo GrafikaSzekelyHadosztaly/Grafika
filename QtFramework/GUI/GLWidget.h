@@ -218,9 +218,9 @@ namespace cagd
         GLboolean curve2_index_spin_changed(int);
         GLboolean direction1_combo_changed(int);
         GLboolean direction2_combo_changed(int);
-        GLboolean call_extend_curve();
-        GLboolean call_merge_curve();
-        GLboolean call_join_curve();
+        void call_extend_curve();
+        void call_merge_curve();
+        void call_join_curve();
         //egy arc kivalasztott vektorjanak mozgatasa
         GLboolean set_arc_vector_index(int);
         GLboolean set_vector_nr_index(int);

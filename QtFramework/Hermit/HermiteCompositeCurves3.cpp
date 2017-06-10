@@ -432,10 +432,10 @@ GLboolean HermiteCompositeCurve::PlusFromRight(GLuint index_of_arc)
 
 GLboolean HermiteCompositeCurve::PlusFromLeft(GLuint index_of_arc)
 {
-    if (index_of_arc >= _arcs.size() || !_arcs[index_of_arc].arc || _arcs[index_of_arc].previous!=nullptr)
+    /*if (index_of_arc >= _arcs.size() || !_arcs[index_of_arc].arc || _arcs[index_of_arc].previous!=nullptr)
     {
         return GL_FALSE;
-    }
+    }*/
     if(_arcs[index_of_arc].previous != nullptr){
         cout << "The selected direction is no free!\n";
         return GL_FALSE;
@@ -469,6 +469,7 @@ GLboolean HermiteCompositeCurve::MergeFromRight(GLuint index_of_arc_1, GLuint in
     if (index_of_arc_1 >= _arcs.size() || !_arcs[index_of_arc_1].arc ||
         index_of_arc_2 >= _arcs.size() || !_arcs[index_of_arc_2].arc )
     {
+
         return GL_FALSE;
     }
 

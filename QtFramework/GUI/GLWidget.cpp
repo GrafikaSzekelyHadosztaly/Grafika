@@ -1794,13 +1794,22 @@ namespace cagd
     }
 
     GLboolean GLWidget::curve1_index_spin_changed(int value){
-        _selected_curve1 = value;
+        if(value < _hermit_cmp_curve->GetSizeOfArcs()){
+            _hermit_cmp_curve->SetColor(_selected_curve1,1.0, 0.0, 0.0);
+            _selected_curve1 = value;
+            _hermit_cmp_curve->SetColor(_selected_curve1,0.0, 0.0, 1.0);
+
+        }
 
         return GL_TRUE;
     }
 
     GLboolean GLWidget::curve2_index_spin_changed(int value){
-        _selected_curve2 = value;
+        if(value < _hermit_cmp_curve->GetSizeOfArcs()){
+            _hermit_cmp_curve->SetColor(_selected_curve2,1.0, 0.0, 0.0);
+            _selected_curve2 = value;
+            _hermit_cmp_curve->SetColor(_selected_curve2,0.0, 1.0, 0.0);
+        }
 
         return GL_TRUE;
     }
@@ -1817,28 +1826,94 @@ namespace cagd
         return GL_TRUE;
     }
 
-    GLboolean GLWidget::call_extend_curve(){
+    void GLWidget::call_extend_curve(){
         GLuint n = _hermit_cmp_curve->GetSizeOfArcs();
         if(_selected_curve1 >= n){
             cout << "The selected curve does not exist!\n";
-            return GL_FALSE;
+            //return GL_FALSE;
         }
 
+        else{
+            if(_direction1 == 0){
+                _hermit_cmp_curve->PlusFromLeft(_selected_curve1);
+            }
+            else{
+                _hermit_cmp_curve->PlusFromRight(_selected_curve1);
+            }
+        }
+    }
 
-        if(_direction1 == 0){
-            return _hermit_cmp_curve->PlusFromLeft(_selected_curve1);
+    void GLWidget::call_merge_curve(){
+        GLuint n = _hermit_cmp_curve->GetSizeOfArcs();
+        if(_selected_curve1 >= n || _selected_curve2 >= n){
+            cout << "One of the selected curves does not exist!\n";
         }
         else{
-            return _hermit_cmp_curve->PlusFromRight(_selected_curve1);
+            //case_nr - if 0 right to left
+            //          if 1 right to right
+            //          if 2 left to left
+            //          if 3 left to right
+            GLuint d;
+            switch (_direction1) {
+            case 1:
+                switch (_direction2) {
+                case 1:
+                    d = 1;
+                    break;
+                default:
+                    d = 0;
+                    break;
+                }
+                break;
+            default:
+                switch (_direction2) {
+                case 1:
+                    d = 3;
+                    break;
+                break;
+                default:
+                    d = 2;
+                    break;
+                }
+            }
+            _hermit_cmp_curve->Merge(_selected_curve1,_selected_curve2,d);
         }
     }
 
-    GLboolean GLWidget::call_merge_curve(){
-        return GL_TRUE;
-    }
-
-    GLboolean GLWidget::call_join_curve(){
-
-        return GL_TRUE;
+    void GLWidget::call_join_curve(){
+        GLuint n = _hermit_cmp_curve->GetSizeOfArcs();
+        if(_selected_curve1 >= n || _selected_curve2 >= n){
+            cout << "One of the selected curves does not exist!\n";
+        }
+        else{
+            //case_nr - if 0 right to left
+            //          if 1 right to right
+            //          if 2 left to left
+            //          if 3 left to right
+            GLuint d;
+            switch (_direction1) {
+            case 1:
+                switch (_direction2) {
+                case 1:
+                    d = 1;
+                    break;
+                default:
+                    d = 0;
+                    break;
+                }
+                break;
+            default:
+                switch (_direction2) {
+                case 1:
+                    d = 3;
+                    break;
+                break;
+                default:
+                    d = 2;
+                    break;
+                }
+            }
+            _hermit_cmp_curve->JoinCurves(_selected_curve1,_selected_curve2,d);
+        }
     }
 }
