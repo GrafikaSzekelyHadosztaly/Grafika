@@ -140,6 +140,34 @@ namespace cagd
         connect(_side_widget->curve2_index_spin, SIGNAL(valueChanged(int)), _gl_widget, SLOT(curve2_index_spin_changed(int)));
         connect(_side_widget->dir1_combo, SIGNAL(currentIndexChanged(int)), _gl_widget, SLOT(direction1_combo_changed(int)));
         connect(_side_widget->dir2_combo, SIGNAL(currentIndexChanged(int)), _gl_widget, SLOT(direction2_combo_changed(int)));
+        //egy arc kivalasztott vektorjanak mozgatasa
+        connect(_side_widget->select_arc_vector, SIGNAL(currentIndexChanged(int)), _gl_widget, SLOT(set_arc_vector_index(int)));
+        connect(_side_widget->select_vector_nr, SIGNAL(currentIndexChanged(int)), _gl_widget, SLOT(set_vector_nr_index(int)));
+
+        connect(_side_widget->arc_vector_plusX, SIGNAL(pressed()), _gl_widget, SLOT(arc_vector_plus_X()));
+        connect(_side_widget->arc_vector_plusY, SIGNAL(pressed()), _gl_widget, SLOT(arc_vector_plus_Y()));
+        connect(_side_widget->arc_vector_plusZ, SIGNAL(pressed()), _gl_widget, SLOT(arc_vector_plus_Z()));
+        connect(_side_widget->arc_vector_minusX, SIGNAL(pressed()), _gl_widget, SLOT(arc_vector_minus_X()));
+        connect(_side_widget->arc_vector_minusY, SIGNAL(pressed()), _gl_widget, SLOT(arc_vector_minus_Y()));
+        connect(_side_widget->arc_vector_minusZ, SIGNAL(pressed()), _gl_widget, SLOT(arc_vector_minus_Z()));
+        // CURVES ---------- MANIPULATE ---------------------
+        //_sp_curve -> the index of the curve (spin box)
+        connect(_side_widget->_sp_curve, SIGNAL(valueChanged(int)), _gl_widget, SLOT(set_index_of_curve(int)));
+        //_pb_Y_up, _pb_Y_down -> move selected curve upward and downward (Y)
+        connect(_side_widget->_pb_Y_up, SIGNAL(pressed()), _gl_widget, SLOT(set_pb_Y_up()));
+        connect(_side_widget->_pb_Y_down, SIGNAL(pressed()), _gl_widget, SLOT(set_pb_Y_down()));
+        //_pb_X_up, _pb_X_down -> move selected curve upward and downward (X)
+        connect(_side_widget->_pb_X_up, SIGNAL(pressed()), _gl_widget, SLOT(set_pb_X_up()));
+        connect(_side_widget->_pb_X_down, SIGNAL(pressed()), _gl_widget, SLOT(set_pb_X_down()));
+        //_pb_Z_up, _pb_Z_down -> move selected curve upward and downward (Z)
+        connect(_side_widget->_pb_Z_up, SIGNAL(pressed()), _gl_widget, SLOT(set_pb_Z_up()));
+        connect(_side_widget->_pb_Z_down, SIGNAL(pressed()), _gl_widget, SLOT(set_pb_Z_down()));
+        // color double spin box : _dsp_R, _dsp_G, _dsp_B
+        connect(_side_widget->_dsp_R, SIGNAL(valueChanged(double)), _gl_widget, SLOT(set_R(double)));
+        connect(_side_widget->_dsp_G, SIGNAL(valueChanged(double)), _gl_widget, SLOT(set_G(double)));
+        connect(_side_widget->_dsp_B, SIGNAL(valueChanged(double)), _gl_widget, SLOT(set_B(double)));
+        // _btn_Color
+        connect(_side_widget->_btn_Color, SIGNAL(pressed()), _gl_widget, SLOT(set_curve_color()));
 
 
     }

@@ -73,7 +73,6 @@ namespace cagd
 
         // enabling depth test
         glEnable(GL_DEPTH_TEST);
-//Fcolor
         // setting the color of background
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
@@ -716,6 +715,9 @@ namespace cagd
                 _hermit_cmp_curve->InsertNewArc(arc2);
                 _hermit_cmp_curve->PlusFromRight(1);
                 _hermit_cmp_curve->PlusFromLeft(0);
+
+                //_hermit_cmp_curve->PlusFromRight(1);
+                //_hermit_cmp_curve->PlusFromLeft(0);
                 //_hermit_cmp_curve->PlusFromRight(1);
                 //_hermit_cmp_curve->PlusFromLeft(0);
 
@@ -724,9 +726,9 @@ namespace cagd
                 //_hermit_cmp_curve->Merge(0,1,0); //jobbat ballal
                 //_hermit_cmp_curve->Merge(0,1,1);//jobb jobbal
                 //_hermit_cmp_curve->Merge(0,1,2);//bal ballal
-                _hermit_cmp_curve->Merge(0,1,3);//bal jobbal
+               // _hermit_cmp_curve->Merge(0,1,3);//bal jobbal
                 _hermit_cmp_curve->SetColor(0,0,1,0);
-                //_hermit_cmp_curve->PlusFromLeft(0);
+                _hermit_cmp_curve->PlusFromLeft(0);
                 _hermit_cmp_curve->PlusFromRight(0);
 
                 //_hermit_cmp_curve->PlusFromRight(1);
@@ -749,6 +751,16 @@ namespace cagd
 //                _hermit_cmp_curve->JoinCurves(0,1,3);
 
 //                _hermit_cmp_curve->JoinFromRight(0,1);
+            }
+
+            {
+                //INIT FOR MANIPULATIN (CURVES)
+                index_of_curve = 0;
+                R = 1;
+                G = 1;
+                B = 1;
+                _arc_vector_index = 0;
+                _arc_vector_nr_index = 0;
             }
 
         }
@@ -1587,6 +1599,199 @@ namespace cagd
         return GL_TRUE;
     }
 
+    GLboolean GLWidget::set_arc_vector_index(int value)
+    {
+        _arc_vector_index = value;
+        return GL_TRUE;
+    }
+
+    GLboolean GLWidget::set_vector_nr_index(int value)
+    {
+        _arc_vector_nr_index = value;
+        return GL_TRUE;
+    }
+
+    void GLWidget::arc_vector_plus_X()
+    {
+        if(index_of_curve < _hermit_cmp_curve->GetSizeOfArcs())
+        {
+            if(_arc_vector_index == 0)
+                _hermit_cmp_curve->SetTransX(0.1, index_of_curve, _arc_vector_nr_index);
+            else
+                _hermit_cmp_curve->SetTransTangentX(0.1, index_of_curve, _arc_vector_nr_index);
+        }
+    }
+
+    void GLWidget::arc_vector_plus_Y()
+    {
+        if(index_of_curve < _hermit_cmp_curve->GetSizeOfArcs())
+        {
+            if(_arc_vector_index == 0)
+                _hermit_cmp_curve->SetTransY(0.1, index_of_curve, _arc_vector_nr_index);
+            else
+                _hermit_cmp_curve->SetTransTangentY(0.1, index_of_curve, _arc_vector_nr_index);
+        }
+    }
+
+    void GLWidget::arc_vector_plus_Z()
+    {
+        if(index_of_curve < _hermit_cmp_curve->GetSizeOfArcs())
+        {
+            if(_arc_vector_index == 0)
+                _hermit_cmp_curve->SetTransZ(0.1, index_of_curve, _arc_vector_nr_index);
+            else
+                _hermit_cmp_curve->SetTransTangentZ(0.1, index_of_curve, _arc_vector_nr_index);
+        }
+    }
+
+    void GLWidget::arc_vector_minus_X()
+    {
+        if(index_of_curve < _hermit_cmp_curve->GetSizeOfArcs())
+        {
+            if(_arc_vector_index == 0)
+                _hermit_cmp_curve->SetTransX(-0.1, index_of_curve, _arc_vector_nr_index);
+            else
+                _hermit_cmp_curve->SetTransTangentX(-0.1, index_of_curve, _arc_vector_nr_index);
+        }
+    }
+
+    void GLWidget::arc_vector_minus_Y()
+    {
+        if(index_of_curve < _hermit_cmp_curve->GetSizeOfArcs())
+        {
+            if(_arc_vector_index == 0)
+                _hermit_cmp_curve->SetTransY(-0.1, index_of_curve, _arc_vector_nr_index);
+            else
+                _hermit_cmp_curve->SetTransTangentY(-0.1, index_of_curve, _arc_vector_nr_index);
+        }
+    }
+
+    void GLWidget::arc_vector_minus_Z()
+    {
+        if(index_of_curve < _hermit_cmp_curve->GetSizeOfArcs())
+        {
+            if(_arc_vector_index == 0)
+                _hermit_cmp_curve->SetTransZ(-0.1, index_of_curve, _arc_vector_nr_index);
+            else
+                _hermit_cmp_curve->SetTransTangentZ(-0.1, index_of_curve, _arc_vector_nr_index);
+        }
+    }
+
+    void GLWidget::set_index_of_curve(int value)
+    {
+        if(index_of_curve != value ){
+            index_of_curve = value;
+        }
+    }
+
+    void GLWidget::set_pb_Y_up()
+    {
+        if(index_of_curve < _hermit_cmp_curve->GetSizeOfArcs())
+        {
+            _hermit_cmp_curve->SetArcTransY(0.1,index_of_curve);
+            updateGL();
+        }
+        else
+        {
+            std::cout<<"Index or arcs not existent."<<std::endl;
+        }
+    }
+
+    void GLWidget::set_pb_Y_down()
+    {
+        if(index_of_curve < _hermit_cmp_curve->GetSizeOfArcs())
+        {
+            _hermit_cmp_curve->SetArcTransY(-0.1,index_of_curve);
+            updateGL();
+        }
+        else
+        {
+            std::cout<<"Index or arcs not existent."<<std::endl;
+        }
+    }
+
+    void GLWidget::set_pb_X_up()
+    {
+        if(index_of_curve < _hermit_cmp_curve->GetSizeOfArcs())
+        {
+            _hermit_cmp_curve->SetArcTransX(0.1,index_of_curve);
+            updateGL();
+        }
+        else
+        {
+            std::cout<<"Index or arcs not existent."<<std::endl;
+        }
+
+    }
+
+    void GLWidget::set_pb_X_down()
+    {
+        if(index_of_curve < _hermit_cmp_curve->GetSizeOfArcs())
+        {
+            _hermit_cmp_curve->SetArcTransX(-0.1,index_of_curve);
+            updateGL();
+        }
+        else
+        {
+            std::cout<<"Index or arcs not existent."<<std::endl;
+        }
+    }
+
+    void GLWidget::set_pb_Z_up()
+    {
+        if(index_of_curve < _hermit_cmp_curve->GetSizeOfArcs())
+        {
+            _hermit_cmp_curve->SetArcTransZ(0.1,index_of_curve);
+            updateGL();
+        }
+        else
+        {
+            std::cout<<"Index or arcs not existent."<<std::endl;
+        }
+    }
+
+    void GLWidget::set_pb_Z_down()
+    {
+        if(index_of_curve < _hermit_cmp_curve->GetSizeOfArcs())
+        {
+            _hermit_cmp_curve->SetArcTransZ(-0.1,index_of_curve);
+            updateGL();
+        }
+        else
+        {
+            std::cout<<"Index or arcs not existent."<<std::endl;
+        }
+    }
+    void GLWidget::set_R(double value)
+    {
+        if(R != value){
+            R = value;
+        }
+    }
+    void GLWidget::set_G(double value)
+    {
+        if(G != value){
+            G = value;
+        }
+    }
+    void GLWidget::set_B(double value)
+    {
+        if(B != value){
+            B = value;
+        }
+    }
+    void GLWidget::set_curve_color()
+    {
+        if(index_of_curve < _hermit_cmp_curve->GetSizeOfArcs())
+        {
+            _hermit_cmp_curve->SetColor(index_of_curve,R,G,B);
+            updateGL();
+        }
+        else
+        {
+            std::cout<<"Index or arcs not existent."<<std::endl;
+        }
+    }
 
     GLboolean GLWidget::curve1_index_spin_changed(int value){
         _selected_curve1 = value;
