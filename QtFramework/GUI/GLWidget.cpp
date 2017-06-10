@@ -692,8 +692,8 @@ namespace cagd
             //HERMITE COMPOSITE CURVE TEST
             {
                 HermiteArc   *arc1 = new HermiteArc();
-                DCoordinate3 p1(-1.0, -1.0, +2.0);
-                DCoordinate3 p2(+1.0, +1.0, +2.0);
+                DCoordinate3 p1(+1.0, +1.0, +2.0);
+                DCoordinate3 p2(+1.0, +3.0, +2.0);
                 DCoordinate3 t1(-1.0, +1.0, +2.0);
                 DCoordinate3 t2(+1.0, +1.0, +2.0);
                 arc1->SetData(0,p1);
@@ -702,8 +702,8 @@ namespace cagd
                 arc1->SetData(3,t2);
 
                 HermiteArc   *arc2 = new HermiteArc();
-                DCoordinate3 p12(+2.0, +2.0, +2.0);
-                DCoordinate3 p22(+3.0, +1.0, +2.0);
+                DCoordinate3 p12(+3.0, +0.0, +2.0);
+                DCoordinate3 p22(+3.0, +2.0, +2.0);
                 DCoordinate3 t12(-1.0, +1.0, +2.0);
                 DCoordinate3 t22(+1.0, +1.0, +2.0);
                 arc2->SetData(0,p12);
@@ -714,8 +714,33 @@ namespace cagd
                 _hermit_cmp_curve = new HermiteCompositeCurve();
                 _hermit_cmp_curve->InsertNewArc(arc1);
                 _hermit_cmp_curve->InsertNewArc(arc2);
+<<<<<<< HEAD
                 _hermit_cmp_curve->PlusFromRight(1);
                 _hermit_cmp_curve->PlusFromLeft(0);
+=======
+                //_hermit_cmp_curve->PlusFromRight(1);
+                //_hermit_cmp_curve->PlusFromLeft(0);
+
+
+                //MERGE PROBA
+                //_hermit_cmp_curve->Merge(0,1,0); //jobbat ballal
+                //_hermit_cmp_curve->Merge(0,1,1);//jobb jobbal
+                //_hermit_cmp_curve->Merge(0,1,2);//bal ballal
+                _hermit_cmp_curve->Merge(0,1,3);//bal jobbal
+                _hermit_cmp_curve->SetColor(0,0,1,0);
+                //_hermit_cmp_curve->PlusFromLeft(0);
+                _hermit_cmp_curve->PlusFromRight(0);
+
+                //_hermit_cmp_curve->PlusFromRight(1);
+
+                //_hermit_cmp_curve->JoinFromRight(0,1);
+                //_hermit_cmp_curve->SetTransX(1, 1, 0);
+                //_hermit_cmp_curve->PlusFromRight(1);
+                //_hermit_cmp_curve->PlusFromLeft(0);
+                //_hermit_cmp_curve->SetArcTransX(1, 0);
+                //_hermit_cmp_curve->SetArcTransY(1, 0);
+                //_hermit_cmp_curve->SetArcTransZ(1, 0);
+>>>>>>> 69de0a2c1a1a192f9f862d725063899613f2edb4
                 //_hermit_cmp_curve->MergeFromRight(0,1);
                 //_hermit_cmp_curve->PlusFromRight(0);
                 //_hermit_cmp_curve->PlusFromRight(1);
@@ -1522,8 +1547,6 @@ namespace cagd
     GLboolean GLWidget::set_corners_index(int value)
     {
 
-        cout << "Juhuj1:" << endl;// text << endl;
-
         _corner_index = value;
 
         return GL_TRUE;
@@ -1532,8 +1555,6 @@ namespace cagd
     GLboolean GLWidget::set_vectors_index(int value)
     {
 
-        cout << "Juhuj2:" << endl;// text << endl;
-
         _vector_index = value;
 
         return GL_TRUE;
@@ -1541,21 +1562,18 @@ namespace cagd
 
     GLboolean GLWidget::_xValue_changed(double value)
     {
-        cout << "xValue:" << endl;// text << endl;
         _xValue = value;
         return GL_TRUE;
     }
 
     GLboolean GLWidget::_yValue_changed(double value)
     {
-         cout << "yValue:" << endl;// text << endl;
         _yValue = value;
         return GL_TRUE;
     }
 
     GLboolean GLWidget::_zValue_changed(double value)
     {
-         cout << "zValue:" << endl;// text << endl;
          _zValue = value;
         return GL_TRUE;
     }
@@ -1563,7 +1581,8 @@ namespace cagd
 
     GLboolean GLWidget::_change_bt_clicked()
     {
-        cout << "Klikk:" << _xValue <<" " << _yValue << " " << _zValue << endl;
+        _hermite_surface->setVectorXYZ(_vector_index,_corner_index,_xValue,_yValue,_zValue,_patch_index);
+
         return GL_TRUE;
     }
 
