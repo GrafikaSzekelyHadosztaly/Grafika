@@ -1106,3 +1106,378 @@ void HermiteCompositeSurface3::write_patch(GLuint i){
 
     file.close();
 }
+
+
+
+GLboolean HermiteCompositeSurface3::setCornerXYZ(GLuint _corner_index,GLdouble _xValue,GLdouble _yValue,GLdouble _zValue,GLuint _patch_index)
+{
+    switch(_corner_index)
+    {
+        case 0:
+        {
+            _patches[_patch_index]._patch->SetCorner(0, 1, _xValue, _yValue, _zValue);
+            if(_patches[_patch_index]._neighbours[6] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[6]->_patch->SetCorner(1,1,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[7] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[7]->_patch->SetCorner(1,0,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[0] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[0]->_patch->SetCorner(0,0,_xValue, _yValue, _zValue);
+
+            }
+         }break;
+        case 1:
+        {
+            _patches[_patch_index]._patch->SetCorner(1, 1, _xValue, _yValue, _zValue);
+            if(_patches[_patch_index]._neighbours[0] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[0]->_patch->SetCorner(1,0,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[1] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[1]->_patch->SetCorner(0,0,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[2] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[2]->_patch->SetCorner(0,1,_xValue, _yValue, _zValue);
+
+            }
+         }break;
+        case 2:
+        {
+            _patches[_patch_index]._patch->SetCorner(1, 0, _xValue, _yValue, _zValue);
+            if(_patches[_patch_index]._neighbours[2] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[2]->_patch->SetCorner(0,0,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[3] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[3]->_patch->SetCorner(0,1,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[4] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[4]->_patch->SetCorner(1,1,_xValue, _yValue, _zValue);
+
+            }
+         }break;
+        case 3:
+        {
+            _patches[_patch_index]._patch->SetCorner(0, 0, _xValue, _yValue, _zValue); //Nyugat
+            if(_patches[_patch_index]._neighbours[4] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[4]->_patch->SetCorner(0,1,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[5] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[5]->_patch->SetCorner(1,1,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[6] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[6]->_patch->SetCorner(1,0,_xValue, _yValue, _zValue);
+
+            }
+         }break;
+        }
+
+    return GL_TRUE;
+}
+
+GLboolean HermiteCompositeSurface3::setUTangentXYZ(GLuint _corner_index,GLdouble _xValue,GLdouble _yValue,GLdouble _zValue,GLuint _patch_index)
+{
+    switch(_corner_index)
+    {
+        case 0:
+        {
+            _patches[_patch_index]._patch->SetUTangent(0, 1, _xValue, _yValue, _zValue);
+            if(_patches[_patch_index]._neighbours[6] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[6]->_patch->SetUTangent(1,1,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[7] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[7]->_patch->SetUTangent(1,0,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[0] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[0]->_patch->SetUTangent(0,0,_xValue, _yValue, _zValue);
+
+            }
+         }break;
+        case 1:
+        {
+            _patches[_patch_index]._patch->SetUTangent(1, 1, _xValue, _yValue, _zValue);
+            if(_patches[_patch_index]._neighbours[0] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[0]->_patch->SetUTangent(1,0,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[1] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[1]->_patch->SetUTangent(0,0,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[2] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[2]->_patch->SetUTangent(0,1,_xValue, _yValue, _zValue);
+
+            }
+         }break;
+        case 2:
+        {
+            _patches[_patch_index]._patch->SetUTangent(1, 0, _xValue, _yValue, _zValue);
+            if(_patches[_patch_index]._neighbours[2] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[2]->_patch->SetUTangent(0,0,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[3] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[3]->_patch->SetUTangent(0,1,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[4] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[4]->_patch->SetUTangent(1,1,_xValue, _yValue, _zValue);
+
+            }
+         }break;
+        case 3:
+        {
+            _patches[_patch_index]._patch->SetUTangent(0, 0, _xValue, _yValue, _zValue); //Nyugat
+            if(_patches[_patch_index]._neighbours[4] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[4]->_patch->SetUTangent(0,1,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[5] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[5]->_patch->SetUTangent(1,1,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[6] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[6]->_patch->SetUTangent(1,0,_xValue, _yValue, _zValue);
+
+            }
+         }break;
+        }
+
+    return GL_TRUE;
+}
+
+GLboolean HermiteCompositeSurface3::setVTangentXYZ(GLuint _corner_index,GLdouble _xValue,GLdouble _yValue,GLdouble _zValue,GLuint _patch_index)
+{
+    switch(_corner_index)
+    {
+        case 0:
+        {
+            _patches[_patch_index]._patch->SetVTangent(0, 1, _xValue, _yValue, _zValue);
+            if(_patches[_patch_index]._neighbours[6] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[6]->_patch->SetVTangent(1,1,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[7] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[7]->_patch->SetVTangent(1,0,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[0] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[0]->_patch->SetVTangent(0,0,_xValue, _yValue, _zValue);
+
+            }
+         }break;
+        case 1:
+        {
+            _patches[_patch_index]._patch->SetVTangent(1, 1, _xValue, _yValue, _zValue);
+            if(_patches[_patch_index]._neighbours[0] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[0]->_patch->SetVTangent(1,0,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[1] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[1]->_patch->SetVTangent(0,0,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[2] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[2]->_patch->SetVTangent(0,1,_xValue, _yValue, _zValue);
+
+            }
+         }break;
+        case 2:
+        {
+            _patches[_patch_index]._patch->SetVTangent(1, 0, _xValue, _yValue, _zValue);
+            if(_patches[_patch_index]._neighbours[2] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[2]->_patch->SetVTangent(0,0,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[3] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[3]->_patch->SetVTangent(0,1,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[4] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[4]->_patch->SetVTangent(1,1,_xValue, _yValue, _zValue);
+
+            }
+         }break;
+        case 3:
+        {
+            _patches[_patch_index]._patch->SetVTangent(0, 0, _xValue, _yValue, _zValue); //Nyugat
+            if(_patches[_patch_index]._neighbours[4] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[4]->_patch->SetVTangent(0,1,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[5] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[5]->_patch->SetVTangent(1,1,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[6] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[6]->_patch->SetVTangent(1,0,_xValue, _yValue, _zValue);
+
+            }
+         }break;
+        }
+
+    return GL_TRUE;
+}
+
+GLboolean HermiteCompositeSurface3::setTwistXYZ(GLuint _corner_index,GLdouble _xValue,GLdouble _yValue,GLdouble _zValue,GLuint _patch_index)
+{
+    switch(_corner_index)
+    {
+        case 0:
+        {
+            _patches[_patch_index]._patch->SetTwist(0, 1, _xValue, _yValue, _zValue);
+            if(_patches[_patch_index]._neighbours[6] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[6]->_patch->SetTwist(1,1,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[7] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[7]->_patch->SetTwist(1,0,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[0] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[0]->_patch->SetTwist(0,0,_xValue, _yValue, _zValue);
+
+            }
+         }break;
+        case 1:
+        {
+            _patches[_patch_index]._patch->SetTwist(1, 1, _xValue, _yValue, _zValue);
+            if(_patches[_patch_index]._neighbours[0] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[0]->_patch->SetTwist(1,0,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[1] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[1]->_patch->SetTwist(0,0,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[2] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[2]->_patch->SetTwist(0,1,_xValue, _yValue, _zValue);
+
+            }
+         }break;
+        case 2:
+        {
+            _patches[_patch_index]._patch->SetTwist(1, 0, _xValue, _yValue, _zValue);
+            if(_patches[_patch_index]._neighbours[2] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[2]->_patch->SetTwist(0,0,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[3] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[3]->_patch->SetTwist(0,1,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[4] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[4]->_patch->SetTwist(1,1,_xValue, _yValue, _zValue);
+
+            }
+         }break;
+        case 3:
+        {
+            _patches[_patch_index]._patch->SetTwist(0, 0, _xValue, _yValue, _zValue); //Nyugat
+            if(_patches[_patch_index]._neighbours[4] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[4]->_patch->SetTwist(0,1,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[5] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[5]->_patch->SetTwist(1,1,_xValue, _yValue, _zValue);
+
+            }
+            if(_patches[_patch_index]._neighbours[6] != nullptr)
+            {
+               _patches[_patch_index]._neighbours[6]->_patch->SetTwist(1,0,_xValue, _yValue, _zValue);
+
+            }
+         }break;
+        }
+
+    return GL_TRUE;
+}
+
+
+
+
+GLboolean HermiteCompositeSurface3::setVectorXYZ(GLuint _vector_index,GLuint _corner_index,GLdouble _xValue,GLdouble _yValue,GLdouble _zValue,GLuint _patch_index)
+{
+    switch(_vector_index)
+    {
+        case 0:
+        {
+             setCornerXYZ(_corner_index,_xValue,_yValue,_zValue,_patch_index);
+         }break;
+
+        case 1:
+        {
+            setUTangentXYZ(_corner_index,_xValue,_yValue,_zValue,_patch_index);
+        } break;
+
+        case 2:
+        {
+            setVTangentXYZ(_corner_index,_xValue,_yValue,_zValue,_patch_index);
+        } break;
+
+        case 3:
+        {
+            setTwistXYZ(_corner_index,_xValue,_yValue,_zValue,_patch_index);
+        } break;
+    }
+
+    GenerateImagesOfAllPatches();
+
+    return GL_TRUE;
+}

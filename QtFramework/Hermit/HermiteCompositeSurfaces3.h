@@ -86,6 +86,11 @@ namespace cagd {
             GLboolean SetNorthWest(GLuint i, DCoordinate3* vectors);
             GLboolean SetSouthEast(GLuint i, DCoordinate3* vectors);
             GLboolean SetSouthWest(GLuint i, DCoordinate3* vectors);
+            GLboolean setVectorXYZ(GLuint i,GLuint j,GLdouble _xValue,GLdouble _yValue,GLdouble _zValue,GLuint _patch_index);
+            GLboolean setCornerXYZ(GLuint j,GLdouble _xValue,GLdouble _yValue,GLdouble _zValue,GLuint _patch_index);
+            GLboolean setUTangentXYZ(GLuint j,GLdouble _xValue,GLdouble _yValue,GLdouble _zValue,GLuint _patch_index);
+            GLboolean setVTangentXYZ(GLuint j,GLdouble _xValue,GLdouble _yValue,GLdouble _zValue,GLuint _patch_index);
+            GLboolean setTwistXYZ(GLuint j,GLdouble _xValue,GLdouble _yValue,GLdouble _zValue,GLuint _patch_index);
 
             void write_patch(GLuint i);
     };

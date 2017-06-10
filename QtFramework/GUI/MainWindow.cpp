@@ -126,9 +126,8 @@ namespace cagd
 
         //egy sarok vektorertekeinek valtoztatasai - (x,y,z)
 
-        //connect(_side_widget->_corners_cb, SIGNAL(currentIndexChanged(int)), _gl_widget, SLOT(set_corners_index(int, string text = _side_widget->_xValue_tb->text())));
-
         connect(_side_widget->_corners_cb, SIGNAL(currentIndexChanged(int)), _gl_widget, SLOT(set_corners_index(int)));
+        connect(_side_widget->_vectors_cb, SIGNAL(currentIndexChanged(int)), _gl_widget, SLOT(set_vectors_index(int)));
 
         connect(_side_widget->_xValue_tb, SIGNAL(valueChanged(double)), _gl_widget, SLOT(_xValue_changed(double)));
         connect(_side_widget->_yValue_tb, SIGNAL(valueChanged(double)), _gl_widget, SLOT(_yValue_changed(double)));

@@ -1454,6 +1454,9 @@ namespace cagd
     GLboolean GLWidget::_change_bt_clicked()
     {
         cout << "Klikk:" << _xValue <<" " << _yValue << " " << _zValue << endl;
+
+        _hermite_surface->setVectorXYZ(_vector_index,_corner_index,_xValue,_yValue,_zValue,_patch_index);
+
         return GL_TRUE;
     }
 
