@@ -1,4 +1,5 @@
 #include "Hermit/HermiteCompositeSurfaces3.h"
+#include <fstream>
 
 using namespace cagd;
 using namespace std;
@@ -597,6 +598,80 @@ GLboolean HermiteCompositeSurface3::ExtendPatch(GLuint index, GLuint dir)
     return GL_TRUE;
 }
 
+GLboolean HermiteCompositeSurface3::ExtendNewPatch(GLuint index, GLuint dir)
+{
+    if(_patches[index]._neighbours[dir] != nullptr)
+    {
+        return GL_FALSE;
+    }
+
+    GLuint dir2;
+
+    DCoordinate3* _vectors1;
+    DCoordinate3* _vectors2;
+    DCoordinate3* _vectors;
+
+    GLuint n = _patches.size();
+    _patches.resize(n + 1);
+    _patches[n]._patch = new HermitePatch();
+    _patches[n]._index = n;
+
+    switch(dir)
+        {
+        case 0:
+            // NOTRH
+            _vectors1 = GetNorth(index);
+            _vectors2 = GetSouth(index);
+            _vectors = Extend(_vectors1, _vectors2, 8);
+
+            SetNorth(n, _vectors);
+            SetSouth(n,_vectors1);
+            dir2 = 4;
+            break;
+
+        case 2:
+            // EAST
+            _vectors1 = GetEast(index);
+            _vectors2 = GetWest(index);
+            _vectors = Extend(_vectors1, _vectors2, 8);
+
+            SetEast(n, _vectors);
+            SetWest(n, _vectors1);
+            dir2 = 6;
+            break;
+
+        case 4:
+            // SOUTH
+            _vectors1 = GetSouth(index);
+            _vectors2 = GetNorth(index);
+            _vectors = Extend(_vectors1, _vectors2, 8);
+
+            SetSouth(n, _vectors);
+            SetNorth(n, _vectors1);
+            dir2 = 0;
+            break;
+
+        case 6:
+            // WEST
+            _vectors1 = GetWest(index);
+            _vectors2 = GetEast(index);
+            _vectors = Extend(_vectors1, _vectors2, 8);
+
+            SetWest(n, _vectors);
+            SetEast(n,_vectors1);
+            dir2 = 2;
+            break;
+        }
+
+    _patches[index]._neighbours[dir]  = &_patches[n];
+    _patches[n]._neighbours[dir2]       = &_patches[index];
+
+    GenerateImagesOfAllPatches();
+
+    return GL_TRUE;
+}
+
+
 DCoordinate3* HermiteCompositeSurface3::Extend(DCoordinate3* vectors1, DCoordinate3* vectors2, GLuint count){
     DCoordinate3 *ret = new DCoordinate3[count];
     for(GLuint i = 0; i < count; i++)
@@ -966,3 +1041,68 @@ GLboolean HermiteCompositeSurface3::SetSouthWest(GLuint i, DCoordinate3 *vectors
     return GL_TRUE;
 }
 
+void HermiteCompositeSurface3::write_patch(GLuint i){
+    string filename;
+    int j = -1;
+
+    ifstream file1;
+    do
+    {
+        j++;
+        if(j < 10)
+            filename = "Patches/patch0" + to_string(j) + ".txt";
+        else
+            filename = "Patches/patch" + to_string(j) + ".txt";
+        file1.close();
+        file1.open(filename);
+    }while(file1.good());
+
+    file1.close();
+
+    ofstream file(filename);
+    DCoordinate3 out_data;
+
+    out_data = _patches[i]._patch->GetCorner(0,0);
+    file << out_data[0] << " " << out_data[1] << " " << out_data[2] << endl;
+    out_data = _patches[i]._patch->GetCorner(0,1);
+    file << out_data[0] << " " << out_data[1] << " " << out_data[2] << endl;
+    out_data = _patches[i]._patch->GetCorner(1,0);
+    file << out_data[0] << " " << out_data[1] << " " << out_data[2] << endl;
+    out_data = _patches[i]._patch->GetCorner(1,1);
+    file << out_data[0] << " " << out_data[1] << " " << out_data[2] << endl;
+
+    file << endl;
+
+    out_data = _patches[i]._patch->GetUTangent(0,0);
+    file << out_data[0] << " " << out_data[1] << " " << out_data[2] << endl;
+    out_data = _patches[i]._patch->GetUTangent(0,1);
+    file << out_data[0] << " " << out_data[1] << " " << out_data[2] << endl;
+    out_data = _patches[i]._patch->GetUTangent(1,0);
+    file << out_data[0] << " " << out_data[1] << " " << out_data[2] << endl;
+    out_data = _patches[i]._patch->GetUTangent(1,1);
+    file << out_data[0] << " " << out_data[1] << " " << out_data[2] << endl;
+
+    file << endl;
+
+    out_data = _patches[i]._patch->GetVTangent(0,0);
+    file << out_data[0] << " " << out_data[1] << " " << out_data[2] << endl;
+    out_data = _patches[i]._patch->GetVTangent(0,1);
+    file << out_data[0] << " " << out_data[1] << " " << out_data[2] << endl;
+    out_data = _patches[i]._patch->GetVTangent(1,0);
+    file << out_data[0] << " " << out_data[1] << " " << out_data[2] << endl;
+    out_data = _patches[i]._patch->GetVTangent(1,1);
+    file << out_data[0] << " " << out_data[1] << " " << out_data[2] << endl;
+
+    file << endl;
+
+    out_data = _patches[i]._patch->GetTwist(0,0);
+    file << out_data[0] << " " << out_data[1] << " " << out_data[2] << endl;
+    out_data = _patches[i]._patch->GetTwist(0,1);
+    file << out_data[0] << " " << out_data[1] << " " << out_data[2] << endl;
+    out_data = _patches[i]._patch->GetTwist(1,0);
+    file << out_data[0] << " " << out_data[1] << " " << out_data[2] << endl;
+    out_data = _patches[i]._patch->GetTwist(1,1);
+    file << out_data[0] << " " << out_data[1] << " " << out_data[2] << endl;
+
+    file.close();
+}

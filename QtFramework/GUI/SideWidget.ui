@@ -1042,6 +1042,32 @@
     <string>Patch 2</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="write_btn">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>270</y>
+     <width>81</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Write patch</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="extend_new_btn">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>300</y>
+     <width>91</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>ExtendNewP1</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

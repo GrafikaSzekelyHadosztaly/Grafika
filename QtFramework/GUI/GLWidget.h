@@ -147,6 +147,8 @@ namespace cagd
         void set_file_index(int);
         void call_read_patch();
         GLboolean read_patch(GLuint i);
+
+        void call_write_patch();
         // patch attributumok valtoztatasa
         void set_patch_index(int);
         GLboolean set_shader_index(int);
@@ -157,6 +159,7 @@ namespace cagd
         void set_patch1_index(int);
         void set_patch2_index(int);
         GLboolean call_extend_patch();
+        GLboolean call_extend_new_patch();
         GLboolean call_join_patch();
         GLboolean call_merge_patch();
         // translacio x, y, z iranyokba
