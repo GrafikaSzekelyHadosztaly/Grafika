@@ -135,6 +135,17 @@ namespace cagd
 
         connect(_side_widget->_change_bt, SIGNAL(pressed()), _gl_widget, SLOT(_change_bt_clicked()));
 
+        //egy arc kivalasztott vektorjanak mozgatasa
+        connect(_side_widget->select_arc_vector, SIGNAL(currentIndexChanged(int)), _gl_widget, SLOT(set_arc_vector_index(int)));
+        connect(_side_widget->select_vector_nr, SIGNAL(currentIndexChanged(int)), _gl_widget, SLOT(set_vector_nr_index(int)));
+
+        connect(_side_widget->arc_vector_plusX, SIGNAL(pressed()), _gl_widget, SLOT(arc_vector_plus_X()));
+        connect(_side_widget->arc_vector_plusY, SIGNAL(pressed()), _gl_widget, SLOT(arc_vector_plus_Y()));
+        connect(_side_widget->arc_vector_plusZ, SIGNAL(pressed()), _gl_widget, SLOT(arc_vector_plus_Z()));
+        connect(_side_widget->arc_vector_minusX, SIGNAL(pressed()), _gl_widget, SLOT(arc_vector_minus_X()));
+        connect(_side_widget->arc_vector_minusY, SIGNAL(pressed()), _gl_widget, SLOT(arc_vector_minus_Y()));
+        connect(_side_widget->arc_vector_minusZ, SIGNAL(pressed()), _gl_widget, SLOT(arc_vector_minus_Z()));
+
     }
 
 

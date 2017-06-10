@@ -118,6 +118,10 @@ namespace cagd
         GenericCurve3           *_arc_test_img;
         HermiteCompositeCurve   *_hermit_cmp_curve;
 
+        //egy arc kivalasztott vektorjanak mozgatasa
+        GLuint      _arc_vector_index;
+        GLuint      _arc_vector_nr_index;
+
 
     //protected:
 
@@ -184,6 +188,19 @@ namespace cagd
         GLboolean _zValue_changed(double);
 
         GLboolean _change_bt_clicked();
+
+        //egy arc kivalasztott vektorjanak mozgatasa
+        GLboolean set_arc_vector_index(int);
+        GLboolean set_vector_nr_index(int);
+
+        void arc_vector_plus_X();
+        void arc_vector_plus_Y();
+        void arc_vector_plus_Z();
+        void arc_vector_minus_X();
+        void arc_vector_minus_Y();
+        void arc_vector_minus_Z();
+
+
     private slots:
         void _animate();
     };

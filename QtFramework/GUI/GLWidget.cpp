@@ -714,10 +714,8 @@ namespace cagd
                 _hermit_cmp_curve = new HermiteCompositeCurve();
                 _hermit_cmp_curve->InsertNewArc(arc1);
                 _hermit_cmp_curve->InsertNewArc(arc2);
-<<<<<<< HEAD
                 _hermit_cmp_curve->PlusFromRight(1);
                 _hermit_cmp_curve->PlusFromLeft(0);
-=======
                 //_hermit_cmp_curve->PlusFromRight(1);
                 //_hermit_cmp_curve->PlusFromLeft(0);
 
@@ -740,7 +738,6 @@ namespace cagd
                 //_hermit_cmp_curve->SetArcTransX(1, 0);
                 //_hermit_cmp_curve->SetArcTransY(1, 0);
                 //_hermit_cmp_curve->SetArcTransZ(1, 0);
->>>>>>> 69de0a2c1a1a192f9f862d725063899613f2edb4
                 //_hermit_cmp_curve->MergeFromRight(0,1);
                 //_hermit_cmp_curve->PlusFromRight(0);
                 //_hermit_cmp_curve->PlusFromRight(1);
@@ -1586,5 +1583,82 @@ namespace cagd
         return GL_TRUE;
     }
 
+    GLboolean GLWidget::set_vectors_index(int value)
+    {
+        _arc_vector_index = value;
+        return GL_TRUE;
+    }
+
+    GLboolean GLWidget::set_vector_nr_index(int value)
+    {
+        _arc_vector_nr_index = value;
+        return GL_TRUE;
+    }
+
+    void GLWidget::arc_vector_plus_X()
+    {
+        if(index_of_curves < _hermit_cmp_curve->GetSizeOfArcs())
+        {
+            if(_arc_vector_index == 0)
+                _hermit_cmp_curve->SetTransX(0.1, index_of_curves, _arc_vector_nr_index);
+            else
+                _hermit_cmp_curve->SetTransTangentX(0.1, index_of_curves, _arc_vector_nr_index);
+        }
+    }
+
+    void GLWidget::arc_vector_plus_Y()
+    {
+        if(index_of_curves < _hermit_cmp_curve->GetSizeOfArcs())
+        {
+            if(_arc_vector_index == 0)
+                _hermit_cmp_curve->SetTransY(0.1, index_of_curves, _arc_vector_nr_index);
+            else
+                _hermit_cmp_curve->SetTransTangentY(0.1, index_of_curves, _arc_vector_nr_index);
+        }
+    }
+
+    void GLWidget::arc_vector_plus_Z()
+    {
+        if(index_of_curves < _hermit_cmp_curve->GetSizeOfArcs())
+        {
+            if(_arc_vector_index == 0)
+                _hermit_cmp_curve->SetTransZ(0.1, index_of_curves, _arc_vector_nr_index);
+            else
+                _hermit_cmp_curve->SetTransTangentZ(0.1, index_of_curves, _arc_vector_nr_index);
+        }
+    }
+
+    void GLWidget::arc_vector_minus_X()
+    {
+        if(index_of_curves < _hermit_cmp_curve->GetSizeOfArcs())
+        {
+            if(_arc_vector_index == 0)
+                _hermit_cmp_curve->SetTransX(-0.1, index_of_curves, _arc_vector_nr_index);
+            else
+                _hermit_cmp_curve->SetTransTangentX(-0.1, index_of_curves, _arc_vector_nr_index);
+        }
+    }
+
+    void GLWidget::arc_vector_minus_Y()
+    {
+        if(index_of_curves < _hermit_cmp_curve->GetSizeOfArcs())
+        {
+            if(_arc_vector_index == 0)
+                _hermit_cmp_curve->SetTransY(-0.1, index_of_curves, _arc_vector_nr_index);
+            else
+                _hermit_cmp_curve->SetTransTangentY(-0.1, index_of_curves, _arc_vector_nr_index);
+        }
+    }
+
+    void GLWidget::arc_vector_minus_Z()
+    {
+        if(index_of_curves < _hermit_cmp_curve->GetSizeOfArcs())
+        {
+            if(_arc_vector_index == 0)
+                _hermit_cmp_curve->SetTransZ(-0.1, index_of_curves, _arc_vector_nr_index);
+            else
+                _hermit_cmp_curve->SetTransTangentZ(-0.1, index_of_curves, _arc_vector_nr_index);
+        }
+    }
 
 }
