@@ -45,12 +45,15 @@ public:
             GLboolean RenderAll(GLboolean elso = GL_FALSE, GLboolean masod = GL_FALSE);
             GLboolean GenerateImageOfSelectedCurve(GLuint arc_index);
             GLboolean GenerateImageOfCurves();
-            GLboolean SetTransZ(GLdouble z,GLuint index_of_arc, GLboolean corner1, GLboolean corner2);
-            GLboolean SetTransY(GLdouble y,GLuint index_of_arc, GLboolean corner1, GLboolean corner2);
-            GLboolean SetTransX(GLdouble x,GLuint index_of_arc, GLboolean corner1, GLboolean corner2);
-            GLboolean SetTransTangentX(GLdouble x,GLuint index_of_arc, GLboolean corner1, GLboolean corner2);
-            GLboolean SetTransTangentY(GLdouble y,GLuint index_of_arc, GLboolean corner1, GLboolean corner2);
-            GLboolean SetTransTangentZ(GLdouble z,GLuint index_of_arc, GLboolean corner1, GLboolean corner2);
+            GLboolean SetArcTransX(GLdouble x, GLuint index_of_arc);
+            GLboolean SetArcTransY(GLdouble y, GLuint index_of_arc);
+            GLboolean SetArcTransZ(GLdouble z, GLuint index_of_arc);
+            GLboolean SetTransX(GLdouble x, GLuint index_of_arc, GLuint index);
+            GLboolean SetTransY(GLdouble y, GLuint index_of_arc, GLuint index);
+            GLboolean SetTransZ(GLdouble z, GLuint index_of_arc, GLuint index);
+            GLboolean SetTransTangentX(GLdouble x, GLuint index_of_arc, GLuint index);
+            GLboolean SetTransTangentY(GLdouble y, GLuint index_of_arc, GLuint index);
+            GLboolean SetTransTangentZ(GLdouble z, GLuint index_of_arc, GLuint index);
 
             GLboolean PlusFromRight(GLuint attribute_index);
             GLboolean PlusFromLeft(GLuint attribute_index);

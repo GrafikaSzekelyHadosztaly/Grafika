@@ -2,6 +2,7 @@
 #include "../Core/DCoordinates3.h"
 #include <iostream>
 
+using namespace std;
 using namespace cagd;
 
 HermiteCompositeCurve::HermiteCompositeCurve()
@@ -74,86 +75,275 @@ GLboolean HermiteCompositeCurve::RenderAll(GLboolean elso, GLboolean masod){
     return GL_TRUE;
 }
 
-GLboolean HermiteCompositeCurve::SetTransX(GLdouble x, GLuint index_of_arc, GLboolean corner1, GLboolean corner2)
+GLboolean HermiteCompositeCurve::SetArcTransX(GLdouble x, GLuint index_of_arc)
+{
+    if(index_of_arc > _arcs.size() || !_arcs[index_of_arc].arc)
+    {
+        cout << "Arc index not existing" << endl;
+        return GL_FALSE;
+    }
+
+    _arcs[index_of_arc].arc->GetData(0)[0] += x;
+    _arcs[index_of_arc].arc->GetData(1)[0] += x;
+
+    ArcAttributes *nextarc = _arcs[index_of_arc].next;
+    ArcAttributes *previousarc = _arcs[index_of_arc].previous;
+
+    while(nextarc != nullptr)
+    {
+        nextarc->arc->GetData(0)[0] += x;
+        nextarc->arc->GetData(1)[0] += x;
+
+        nextarc = nextarc->next;
+    }
+
+    while(previousarc != nullptr)
+    {
+        previousarc->arc->GetData(0)[0] += x;
+        previousarc->arc->GetData(1)[0] += x;
+
+        previousarc = previousarc->previous;
+    }
+
+    GenerateImageOfCurves();
+
+    return GL_TRUE;
+}
+
+GLboolean HermiteCompositeCurve::SetArcTransY(GLdouble y, GLuint index_of_arc)
+{
+    if(index_of_arc > _arcs.size() || !_arcs[index_of_arc].arc)
+    {
+        cout << "Arc index not existing" << endl;
+        return GL_FALSE;
+    }
+
+    _arcs[index_of_arc].arc->GetData(0)[1] += y;
+    _arcs[index_of_arc].arc->GetData(1)[1] += y;
+
+    ArcAttributes *nextarc = _arcs[index_of_arc].next;
+    ArcAttributes *previousarc = _arcs[index_of_arc].previous;
+
+    while(nextarc != nullptr)
+    {
+        nextarc->arc->GetData(0)[1] += y;
+        nextarc->arc->GetData(1)[1] += y;
+
+        nextarc = nextarc->next;
+    }
+
+    while(previousarc != nullptr)
+    {
+        previousarc->arc->GetData(0)[1] += y;
+        previousarc->arc->GetData(1)[1] += y;
+
+        previousarc = previousarc->previous;
+    }
+
+    GenerateImageOfCurves();
+
+    return GL_TRUE;
+}
+
+GLboolean HermiteCompositeCurve::SetArcTransZ(GLdouble z, GLuint index_of_arc)
+{
+    if(index_of_arc > _arcs.size() || !_arcs[index_of_arc].arc)
+    {
+        cout << "Arc index not existing" << endl;
+        return GL_FALSE;
+    }
+
+    _arcs[index_of_arc].arc->GetData(0)[2] += z;
+    _arcs[index_of_arc].arc->GetData(1)[2] += z;
+
+    ArcAttributes *nextarc = _arcs[index_of_arc].next;
+    ArcAttributes *previousarc = _arcs[index_of_arc].previous;
+
+    while(nextarc != nullptr)
+    {
+        nextarc->arc->GetData(0)[2] += z;
+        nextarc->arc->GetData(1)[2] += z;
+
+        nextarc = nextarc->next;
+    }
+
+    while(previousarc != nullptr)
+    {
+        previousarc->arc->GetData(0)[2] += z;
+        previousarc->arc->GetData(1)[2] += z;
+
+        previousarc = previousarc->previous;
+    }
+
+    GenerateImageOfCurves();
+
+    return GL_TRUE;
+}
+
+GLboolean HermiteCompositeCurve::SetTransX(GLdouble x, GLuint index_of_arc, GLuint index)
 {
     if(index_of_arc > _arcs.size() || !_arcs[index_of_arc].arc)
     {
         return GL_FALSE;
     }
-    if (corner1)
+    if(index == 0)
+    {
         _arcs[index_of_arc].arc->GetData(0)[0] += x;
-    if (corner2)
+        if(_arcs[index_of_arc].previous != nullptr)
+        {
+            _arcs[index_of_arc].previous->arc->GetData(1)[0] += x;
+        }
+    }
+    else
+    {
+        if(_arcs[index_of_arc].next != nullptr)
+        {
+            _arcs[index_of_arc].next->arc->GetData(0)[0] += x;
+        }
         _arcs[index_of_arc].arc->GetData(1)[0] += x;
+    }
+
+    GenerateImageOfCurves();
 
     return GL_TRUE;
 }
 
-GLboolean HermiteCompositeCurve::SetTransY(GLdouble y, GLuint index_of_arc, GLboolean corner1, GLboolean corner2)
+GLboolean HermiteCompositeCurve::SetTransY(GLdouble y, GLuint index_of_arc, GLuint index)
 {
     if(index_of_arc > _arcs.size() || !_arcs[index_of_arc].arc)
     {
         return GL_FALSE;
     }
-    if (corner1)
+    if (index == 0)
+    {
+        if(_arcs[index_of_arc].previous != nullptr)
+        {
+            _arcs[index_of_arc].previous->arc->GetData(1)[1] += y;
+        }
         _arcs[index_of_arc].arc->GetData(0)[1] += y;
-    if (corner2)
+    }
+    else
+    {
+        if(_arcs[index_of_arc].next != nullptr)
+        {
+            _arcs[index_of_arc].next->arc->GetData(0)[1] += y;
+        }
         _arcs[index_of_arc].arc->GetData(1)[1] += y;
+    }
+
+    GenerateImageOfCurves();
 
     return GL_TRUE;
 }
 
-GLboolean HermiteCompositeCurve::SetTransZ(GLdouble z, GLuint index_of_arc, GLboolean corner1, GLboolean corner2)
+GLboolean HermiteCompositeCurve::SetTransZ(GLdouble z, GLuint index_of_arc, GLuint index)
 {
     if(index_of_arc > _arcs.size() || !_arcs[index_of_arc].arc)
     {
         return GL_FALSE;
     }
-    if (corner1)
+    if (index == 0)
+    {
+        if(_arcs[index_of_arc].previous != nullptr)
+        {
+            _arcs[index_of_arc].previous->arc->GetData(1)[2] += z;
+        }
         _arcs[index_of_arc].arc->GetData(0)[2] += z;
-    if (corner2)
+    }
+    else
+    {
+        if(_arcs[index_of_arc].next != nullptr)
+        {
+            _arcs[index_of_arc].next->arc->GetData(0)[2] += z;
+        }
         _arcs[index_of_arc].arc->GetData(1)[2] += z;
+    }
+
+    GenerateImageOfCurves();
 
     return GL_TRUE;
 }
 
-GLboolean HermiteCompositeCurve::SetTransTangentX(GLdouble x, GLuint index_of_arc, GLboolean corner1, GLboolean corner2)
+GLboolean HermiteCompositeCurve::SetTransTangentX(GLdouble x, GLuint index_of_arc, GLuint index)
 {
     if(index_of_arc > _arcs.size() || !_arcs[index_of_arc].arc)
     {
         return GL_FALSE;
     }
-    if (corner1)
+    if (index == 0)
+    {
+        if(_arcs[index_of_arc].previous != nullptr)
+        {
+            _arcs[index_of_arc].previous->arc->GetData(3)[0] += x;
+        }
         _arcs[index_of_arc].arc->GetData(2)[0] += x;
-    if (corner2)
+    }
+    else
+    {
+        if(_arcs[index_of_arc].next != nullptr)
+        {
+            _arcs[index_of_arc].next->arc->GetData(2)[0] += x;
+        }
         _arcs[index_of_arc].arc->GetData(3)[0] += x;
+    }
+
+    GenerateImageOfCurves();
 
     return GL_TRUE;
 }
 
-GLboolean HermiteCompositeCurve::SetTransTangentY(GLdouble y, GLuint index_of_arc, GLboolean corner1, GLboolean corner2)
+GLboolean HermiteCompositeCurve::SetTransTangentY(GLdouble y, GLuint index_of_arc, GLuint index)
 {
     if(index_of_arc > _arcs.size() || !_arcs[index_of_arc].arc)
     {
         return GL_FALSE;
     }
-    if (corner1)
+    if (index == 0)
+    {
+        if(_arcs[index_of_arc].previous != nullptr)
+        {
+            _arcs[index_of_arc].previous->arc->GetData(3)[1] += y;
+        }
         _arcs[index_of_arc].arc->GetData(2)[1] += y;
-    if (corner2)
+    }
+    else
+    {
+        if(_arcs[index_of_arc].next != nullptr)
+        {
+            _arcs[index_of_arc].next->arc->GetData(2)[1] += y;
+        }
         _arcs[index_of_arc].arc->GetData(3)[1] += y;
+    }
+
+    GenerateImageOfCurves();
 
     return GL_TRUE;
 }
 
-GLboolean HermiteCompositeCurve::SetTransTangentZ(GLdouble z, GLuint index_of_arc, GLboolean corner1, GLboolean corner2)
+GLboolean HermiteCompositeCurve::SetTransTangentZ(GLdouble z, GLuint index_of_arc, GLuint index)
 {
     if(index_of_arc > _arcs.size() || !_arcs[index_of_arc].arc)
     {
         return GL_FALSE;
     }
-    if (corner1)
+    if (index == 0)
+    {
+        if(_arcs[index_of_arc].previous != nullptr)
+        {
+            _arcs[index_of_arc].previous->arc->GetData(3)[2] += z;
+        }
         _arcs[index_of_arc].arc->GetData(2)[2] += z;
-    if (corner2)
+    }
+    else
+    {
+        if(_arcs[index_of_arc].next != nullptr)
+        {
+            _arcs[index_of_arc].next->arc->GetData(2)[2] += z;
+        }
         _arcs[index_of_arc].arc->GetData(3)[2] += z;
+    }
+
+    GenerateImageOfCurves();
 
     return GL_TRUE;
 }
@@ -226,6 +416,7 @@ GLboolean HermiteCompositeCurve::PlusFromRight(GLuint index_of_arc)
     p1 = _arcs[index_of_arc].arc->GetData(2);
     _arcs[size].arc->SetData(3,p1);
 
+    _arcs[index_of_arc].next = &_arcs[size];
 
     return GenerateImageOfCurves();
 }
@@ -253,6 +444,8 @@ GLboolean HermiteCompositeCurve::PlusFromLeft(GLuint index_of_arc)
 
     p1 = _arcs[index_of_arc].arc->GetData(3);
     _arcs[size].arc->SetData(3,-p1);
+
+    _arcs[index_of_arc].previous = &_arcs[size];
 
     return GenerateImageOfCurves();
 }
