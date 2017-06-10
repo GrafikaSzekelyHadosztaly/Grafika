@@ -59,6 +59,8 @@ namespace cagd {
             GLboolean JoinTwoPatches(GLuint index1, GLuint index2, GLuint dir1, GLuint dir2);
             // egy patch megnyujtasa adott iranyban
             GLboolean ExtendPatch(GLuint index, GLuint dir);
+            // egy patch megnyujtasakent uj patch letrehozasa
+            GLboolean ExtendNewPatch(GLuint index, GLuint dir);
             DCoordinate3* Extend(DCoordinate3* vectors1, DCoordinate3* vectors2, GLuint count);
 
             GLboolean SetTransX(GLuint index, GLdouble x);
@@ -85,5 +87,6 @@ namespace cagd {
             GLboolean SetSouthEast(GLuint i, DCoordinate3* vectors);
             GLboolean SetSouthWest(GLuint i, DCoordinate3* vectors);
 
+            void write_patch(GLuint i);
     };
 }
