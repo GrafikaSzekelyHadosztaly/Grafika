@@ -72,7 +72,7 @@ namespace cagd
 
         // enabling depth test
         glEnable(GL_DEPTH_TEST);
-
+//Fcolor
         // setting the color of background
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
@@ -651,6 +651,65 @@ namespace cagd
                 //_hermite_surface->ExtendPatch(1, 4);
             }
 
+
+            // HERMITE CURVE TEST
+            {
+                _arc_test = new HermiteArc();
+                DCoordinate3 _p1(-1.0, -1.0, +2.0);
+                DCoordinate3 _p2(-1.0, +1.0, +2.0);
+                DCoordinate3 _t1(+1.0, -1.0, +2.0);
+                DCoordinate3 _t2(+1.0, +1.0, +2.0);
+                _arc_test->SetData(0,_p1);
+                _arc_test->SetData(1,_p2);
+                _arc_test->SetData(2,_t1);
+                _arc_test->SetData(3,_t2);
+
+                _arc_test->UpdateVertexBufferObjectsOfData();
+
+               _arc_test_img = 0;
+                _arc_test_img = _arc_test->GenerateImage(0,30,GL_STATIC_DRAW);
+
+                if (_arc_test_img)
+                    _arc_test_img->UpdateVertexBufferObjects();
+                else
+                    throw Exception("_arc_test_img UpdateVertexBufferObjects error");
+
+            }
+
+
+            //HERMITE COMPOSITE CURVE TEST
+            {
+                HermiteArc   *arc1 = new HermiteArc();
+                DCoordinate3 p1(-1.0, -1.0, +2.0);
+                DCoordinate3 p2(+1.0, +1.0, +2.0);
+                DCoordinate3 t1(-1.0, +1.0, +2.0);
+                DCoordinate3 t2(+1.0, +1.0, +2.0);
+                arc1->SetData(0,p1);
+                arc1->SetData(1,p2);
+                arc1->SetData(2,t1);
+                arc1->SetData(3,t2);
+
+                HermiteArc   *arc2 = new HermiteArc();
+                DCoordinate3 p12(+2.0, +2.0, +2.0);
+                DCoordinate3 p22(+3.0, +1.0, +2.0);
+                DCoordinate3 t12(-1.0, +1.0, +2.0);
+                DCoordinate3 t22(+1.0, +1.0, +2.0);
+                arc2->SetData(0,p12);
+                arc2->SetData(1,p22);
+                arc2->SetData(2,t12);
+                arc2->SetData(3,t22);
+
+                _hermit_cmp_curve = new HermiteCompositeCurve();
+                _hermit_cmp_curve->InsertNewArc(arc1);
+                _hermit_cmp_curve->InsertNewArc(arc2);
+                _hermit_cmp_curve->PlusFromRight(1);
+                _hermit_cmp_curve->PlusFromLeft(0);
+                _hermit_cmp_curve->MergeFromRight(0,1);
+                //_hermit_cmp_curve->PlusFromRight(0);
+                //_hermit_cmp_curve->PlusFromRight(1);
+                //_hermit_cmp_curve->PlusFromRight(2);
+            }
+
         }
         catch (Exception &e)
         {
@@ -903,6 +962,44 @@ namespace cagd
                 glDisable(GL_NORMALIZE);
             }
 
+
+            if(_img_select == 9)
+            {
+                // iranytu
+                glPushMatrix();
+                //glRotatef(0, 0.0, 0.0, 1.0);
+                glTranslated(-7, 0, 0);
+                glScaled(2, 2, 2);
+                glEnable(GL_LIGHTING);
+                _dl->Enable();
+                MatFBRuby.Apply();
+                _off_image[1].Render();
+                glDisable(GL_LIGHTING);
+                glPopMatrix();
+                // iranytu_vege
+
+                glColor3f(0.0,1.0,0.0);
+                _arc_test_img->RenderDerivatives(0,GL_LINE_STRIP);
+
+            }
+
+            if(_img_select == 10)
+            {
+                // iranytu
+                glPushMatrix();
+                //glRotatef(0, 0.0, 0.0, 1.0);
+                glTranslated(-7, 0, 0);
+                glScaled(2, 2, 2);
+                glEnable(GL_LIGHTING);
+                _dl->Enable();
+                MatFBRuby.Apply();
+                _off_image[1].Render();
+                glDisable(GL_LIGHTING);
+                glPopMatrix();
+                // iranytu_vege
+
+                _hermit_cmp_curve->RenderAll();
+            }
 
         // pops the current matrix stack, replacing the current matrix with the one below it on the stack,
         // i.e., the original model view matrix is restored
