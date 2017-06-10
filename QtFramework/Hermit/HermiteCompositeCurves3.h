@@ -1,33 +1,66 @@
 #pragma once
+#include <iostream>
+#include <vector>
+#include <QFile>
+#include <QTextStream>
+#include "../Core/DCoordinates3.h"
+#include "../Core/Colors4.h"
+#include "../Core/GenericCurves3.h"
+#include "../Hermit/HermiteArcs3.h"
 
-#include "HermiteArcs3.h"
-#include "Core/Colors4.h"
+using namespace cagd;
+class HermiteCompositeCurve
+{
+public:
+    HermiteCompositeCurve();
 
-using namespace std;
+    class ArcAttributes
+              {
+                  public:
+                      HermiteArc      *arc;
+                      GenericCurve3   *image;
+                      Color4          *color;
+                      ArcAttributes   *next;
+                      ArcAttributes   *previous;
+                      //konstruktor
 
-namespace cagd {
-    class HermiteCompositeCurve3
-    {
-        public:
-            class ArcAttributes //jellemzok
-            {
-                HermiteArc3     *_arc;
-                GenericCurve3   *_img;
-                Color4          *_color;
+                      ArcAttributes()
+                      {
+                          arc = nullptr;
+                          image = nullptr;
+                          color = nullptr;
+                          next = nullptr;
+                          previous = nullptr;
 
-                ArcAttributes *_next, *_prev;
-                
-                //default konstruktor: mindent NULL pointerre allit (inicializalas)
-                ArcAttributes();
-            };
-        protected:
-            vector<ArcAttributes> _arcs; //kezdetben ures
-            
-        public:
-            //konstruktor, masolo konstr, destruktor, =, render (rajzolni), VBO handling
-            //insert new isolated arc, continue existing arc
-            // --- Constans: enum ArcDirection<LEFT, RIGHT>
-            //join existing arcs, merge args
-            //translate arc, rotate arc, scale arc (eltolas, forgatas, skalazas) M3,3 X M3,1 oszlop
-    };
-}
+                      }
+              };
+
+protected:
+            std::vector<ArcAttributes>  _arcs;
+public:
+
+            GLboolean SetDefaultData(GLuint arc_index, GLuint u_div_point_count,GLuint max_order_of_derivatives);
+            GLboolean InsertNewArc(GLuint u_div_point_count = 40,GLuint max_order_of_derivatives = 2);
+            GLboolean InsertNewArc(HermiteArc* curve);
+            GLboolean RenderAll(GLboolean elso = GL_FALSE, GLboolean masod = GL_FALSE);
+            GLboolean GenerateImageOfSelectedCurve(GLuint arc_index);
+            GLboolean GenerateImageOfCurves();
+            GLboolean SetTransZ(GLdouble z,GLuint index_of_arc, GLboolean corner1, GLboolean corner2);
+            GLboolean SetTransY(GLdouble y,GLuint index_of_arc, GLboolean corner1, GLboolean corner2);
+            GLboolean SetTransX(GLdouble x,GLuint index_of_arc, GLboolean corner1, GLboolean corner2);
+            GLboolean SetTransTangentX(GLdouble x,GLuint index_of_arc, GLboolean corner1, GLboolean corner2);
+            GLboolean SetTransTangentY(GLdouble y,GLuint index_of_arc, GLboolean corner1, GLboolean corner2);
+            GLboolean SetTransTangentZ(GLdouble z,GLuint index_of_arc, GLboolean corner1, GLboolean corner2);
+
+            GLboolean PlusFromRight(GLuint attribute_index);
+            GLboolean PlusFromLeft(GLuint attribute_index);
+
+            GLboolean MergeFromRight(GLuint attribute_index_1, GLuint attribute_index_2);
+            GLboolean MergeFromLeft(GLuint attribute_index_1, GLuint attribute_index_2);
+
+            GLboolean JoinFromRight(GLuint attribute_index_1, GLuint attribute_index_2);
+            GLboolean JoinFromLeft(GLuint attribute_index_1, GLuint attribute_index_2);
+
+            ~HermiteCompositeCurve();
+
+};

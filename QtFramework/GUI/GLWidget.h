@@ -113,6 +113,12 @@ namespace cagd
         GLdouble _zValue;
 
 
+        // HERMITE ARC
+        HermiteArc              *_arc_test;
+        GenericCurve3           *_arc_test_img;
+        HermiteCompositeCurve   *_hermit_cmp_curve;
+
+
     //protected:
 
     public:
