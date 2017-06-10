@@ -714,9 +714,13 @@ namespace cagd
                 _hermit_cmp_curve = new HermiteCompositeCurve();
                 _hermit_cmp_curve->InsertNewArc(arc1);
                 _hermit_cmp_curve->InsertNewArc(arc2);
-                _hermit_cmp_curve->PlusFromRight(1);
-                _hermit_cmp_curve->PlusFromLeft(0);
-                _hermit_cmp_curve->MergeFromRight(0,1);
+                //_hermit_cmp_curve->SetTransX(1, 1, 0);
+                //_hermit_cmp_curve->PlusFromRight(1);
+                //_hermit_cmp_curve->PlusFromLeft(0);
+                //_hermit_cmp_curve->SetArcTransX(1, 0);
+                //_hermit_cmp_curve->SetArcTransY(1, 0);
+                //_hermit_cmp_curve->SetArcTransZ(1, 0);
+                //_hermit_cmp_curve->MergeFromRight(0,1);
                 //_hermit_cmp_curve->PlusFromRight(0);
                 //_hermit_cmp_curve->PlusFromRight(1);
                 //_hermit_cmp_curve->PlusFromRight(2);
