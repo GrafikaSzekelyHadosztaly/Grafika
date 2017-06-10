@@ -57,6 +57,8 @@ namespace cagd
         // patch beolvasasahoz spin file index valasztasra es button meghivasra
         connect(_side_widget->file_index_spin, SIGNAL(valueChanged(int)), _gl_widget, SLOT(set_file_index(int)));
         connect(_side_widget->read_btn, SIGNAL(released()), _gl_widget, SLOT(call_read_patch()));
+        // patch kiiratasa fajlba
+        connect(_side_widget->write_btn, SIGNAL(released()), _gl_widget, SLOT(call_write_patch()));
         // patch shader/mat valtoztatasahoz spin patch index valasztasra es combobox shader/mat index valasztasra
         connect(_side_widget->patch_index_spin, SIGNAL(valueChanged(int)), _gl_widget, SLOT(set_patch_index(int)));
         connect(_side_widget->select_shader, SIGNAL(currentIndexChanged(int)), _gl_widget, SLOT(set_shader_index(int)));
@@ -110,6 +112,7 @@ namespace cagd
         connect(_side_widget->patch2_index_spin, SIGNAL(valueChanged(int)), _gl_widget, SLOT(set_patch2_index(int)));
         // gombok ezekhez ^
         connect(_side_widget->extend_btn, SIGNAL(released()), _gl_widget, SLOT(call_extend_patch()));
+        connect(_side_widget->extend_new_btn, SIGNAL(released()), _gl_widget, SLOT(call_extend_new_patch()));
         connect(_side_widget->join_btn, SIGNAL(released()), _gl_widget, SLOT(call_join_patch()));
         connect(_side_widget->merge_btn, SIGNAL(released()), _gl_widget, SLOT(call_merge_patch()));
 

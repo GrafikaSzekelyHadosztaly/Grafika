@@ -1136,6 +1136,15 @@ namespace cagd
         return GL_TRUE;
     }
 
+    void GLWidget::call_write_patch(){
+        if(_patch_index < _hermite_surface->GetNumberOfPatches()){
+            _hermite_surface->write_patch(_patch_index);
+        }
+        else{
+            cout << "Patch index " << _patch_index << " does not exist!" << endl;
+        }
+    }
+
     void GLWidget::set_patch_index(int value)
     {
         if(_patch_index != value)
@@ -1285,6 +1294,17 @@ namespace cagd
         _hermite_surface->ExtendPatch(_patch1_index, _dir1);
 
         return GL_TRUE;
+    }
+
+    GLboolean GLWidget::call_extend_new_patch(){
+        GLuint n = _hermite_surface->GetNumberOfPatches();
+        if(_patch1_index > n - 1)
+        {
+            cout << "Patch 1 index not existing" << endl;
+            return GL_FALSE;
+        }
+
+        return _hermite_surface->ExtendNewPatch(_patch1_index, _dir1);
     }
 
     GLboolean GLWidget::call_join_patch()
