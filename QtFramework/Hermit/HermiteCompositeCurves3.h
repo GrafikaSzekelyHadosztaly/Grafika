@@ -9,6 +9,7 @@
 #include "../Hermit/HermiteArcs3.h"
 #include <fstream>
 
+using namespace std;
 using namespace cagd;
 class HermiteCompositeCurve
 {
@@ -41,6 +42,7 @@ public:
 
             GLboolean InsertNewArc();
             GLboolean InsertNewArc(HermiteArc* curve);
+            GLboolean InsertIsolatedCurve(vector<DCoordinate3> corners, vector<DCoordinate3> tangents);
             GLboolean RenderAll(GLboolean der1 = GL_FALSE, GLboolean der2 = GL_FALSE);
             GLboolean GenerateImageOfSelectedCurve(GLuint arc_index);
             GLboolean GenerateImageOfCurves();

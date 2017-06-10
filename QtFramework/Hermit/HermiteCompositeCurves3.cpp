@@ -54,13 +54,13 @@ GLboolean HermiteCompositeCurve::InsertIsolatedCurve(vector<DCoordinate3> corner
 
     _arcs.resize(n + 1);
 
-    _arcs[n]._arc = new HermiteArc();
+    _arcs[n].arc = new HermiteArc();
 
-    _arcs[n].->arc->SetData(0, corners[0]);
-    _arcs[n].->arc->SetData(1, corners[1]);
+    _arcs[n].arc->SetData(0, corners[0]);
+    _arcs[n].arc->SetData(1, corners[1]);
 
-    _arcs[n].->arc->SetData(2, tangents[0]);
-    _arcs[n].->arc->SetData(3, tangents[1]);
+    _arcs[n].arc->SetData(2, tangents[0]);
+    _arcs[n].arc->SetData(3, tangents[1]);
 
     GenerateImageOfCurves();
 

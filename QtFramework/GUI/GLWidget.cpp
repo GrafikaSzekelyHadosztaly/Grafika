@@ -1325,7 +1325,7 @@ namespace cagd
         corners[1] = corners1;
 
         vector<DCoordinate3> tangents;
-        uTangents.resize(2);
+        tangents.resize(2);
         file >> x >> y >> z;
         DCoordinate3 tangents0(x, y, z);
         file >> x >> y >> z;
@@ -1333,7 +1333,7 @@ namespace cagd
         tangents[0] = tangents0;
         tangents[1] = tangents1;
 
-        _hermit_cmp_curve->InsertIsolatedCurve(corners, uTangents);
+        _hermit_cmp_curve->InsertIsolatedCurve(corners, tangents);
 
         file.close();
 
