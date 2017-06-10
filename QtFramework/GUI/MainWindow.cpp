@@ -172,8 +172,10 @@ namespace cagd
         // _btn_Color
         connect(_side_widget->_btn_Color, SIGNAL(pressed()), _gl_widget, SLOT(set_curve_color()));
 
-        //curve kiirasa a file-ba
+        //curve kiirasa olvasasa a file-ba/bol
         connect(_side_widget->write_curve_btn, SIGNAL(released()), _gl_widget, SLOT(call_write_curve()));
+        connect(_side_widget->arc_file_index_spin, SIGNAL(valueChanged(int)), _gl_widget, SLOT(set_arc_file_index(int)));
+        connect(_side_widget->read_curve_btn, SIGNAL(released()), _gl_widget, SLOT(call_read_curve()));
         //DERIVATIVES _cb_der1 _cb_der2
         connect(_side_widget->_cb_der1,SIGNAL(clicked(bool)),_gl_widget,SLOT(set_der1(bool)) );
         connect(_side_widget->_cb_der2,SIGNAL(clicked(bool)),_gl_widget,SLOT(set_der2(bool)) );

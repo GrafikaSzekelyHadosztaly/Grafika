@@ -133,6 +133,7 @@ namespace cagd
         float       B;
         bool        der1;
         bool        der2;
+        GLuint      _arc_file_index;
 
 
     //protected:
@@ -178,6 +179,7 @@ namespace cagd
 
         void call_read_curve();
         GLboolean read_curve(GLuint index);
+        void set_arc_file_index(int);
 
         // patch attributumok valtoztatasa
         void set_patch_index(int);

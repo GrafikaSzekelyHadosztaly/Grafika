@@ -356,7 +356,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -722,8 +722,8 @@
      <widget class="QPushButton" name="write_curve_btn">
       <property name="geometry">
        <rect>
-        <x>150</x>
-        <y>60</y>
+        <x>170</x>
+        <y>50</y>
         <width>75</width>
         <height>23</height>
        </rect>
@@ -1695,6 +1695,29 @@
    </property>
    <property name="text">
     <string>Derivatives 2</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="read_curve_btn">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>720</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Read from file</string>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="arc_file_index_spin">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>720</y>
+     <width>42</width>
+     <height>22</height>
+    </rect>
    </property>
   </widget>
  </widget>

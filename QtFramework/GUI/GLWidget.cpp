@@ -763,6 +763,7 @@ namespace cagd
                 _arc_vector_nr_index = 0;
                 der1 = false;
                 der2 = false;
+                _arc_file_index = 0;
             }
 
         }
@@ -1293,9 +1294,17 @@ namespace cagd
         return GL_TRUE;
     }
 
+    void GLWidget::set_arc_file_index(int value)
+    {
+        if (_arc_file_index != value)
+        {
+            _arc_file_index = value;
+        }
+    }
+
     void GLWidget::call_read_curve()
     {
-        read_curve(_file_index);
+        read_curve(_arc_file_index);
     }
 
     GLboolean GLWidget::read_curve(GLuint i)
