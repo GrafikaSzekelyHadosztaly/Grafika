@@ -118,6 +118,11 @@ namespace cagd
         GenericCurve3           *_arc_test_img;
         HermiteCompositeCurve   *_hermit_cmp_curve;
 
+        // hermite change indexes
+        GLuint _selected_curve1;
+        GLuint _selected_curve2;
+        GLuint _direction1;
+        GLuint _direction2;
         //egy arc kivalasztott vektorjanak mozgatasa
         GLuint      _arc_vector_index;
         GLuint      _arc_vector_nr_index;
@@ -208,6 +213,14 @@ namespace cagd
 
         GLboolean _change_bt_clicked();
 
+        //gorbe modositasa
+        GLboolean curve1_index_spin_changed(int);
+        GLboolean curve2_index_spin_changed(int);
+        GLboolean direction1_combo_changed(int);
+        GLboolean direction2_combo_changed(int);
+        GLboolean call_extend_curve();
+        GLboolean call_merge_curve();
+        GLboolean call_join_curve();
         //egy arc kivalasztott vektorjanak mozgatasa
         GLboolean set_arc_vector_index(int);
         GLboolean set_vector_nr_index(int);
@@ -218,6 +231,7 @@ namespace cagd
         void arc_vector_minus_X();
         void arc_vector_minus_Y();
         void arc_vector_minus_Z();
+
 
 
     private slots:
