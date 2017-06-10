@@ -692,8 +692,8 @@ namespace cagd
             //HERMITE COMPOSITE CURVE TEST
             {
                 HermiteArc   *arc1 = new HermiteArc();
-                DCoordinate3 p1(-1.0, -1.0, +2.0);
-                DCoordinate3 p2(+1.0, +1.0, +2.0);
+                DCoordinate3 p1(+1.0, +1.0, +2.0);
+                DCoordinate3 p2(+1.0, +3.0, +2.0);
                 DCoordinate3 t1(-1.0, +1.0, +2.0);
                 DCoordinate3 t2(+1.0, +1.0, +2.0);
                 arc1->SetData(0,p1);
@@ -702,8 +702,8 @@ namespace cagd
                 arc1->SetData(3,t2);
 
                 HermiteArc   *arc2 = new HermiteArc();
-                DCoordinate3 p12(+2.0, +2.0, +2.0);
-                DCoordinate3 p22(+3.0, +1.0, +2.0);
+                DCoordinate3 p12(+3.0, +0.0, +2.0);
+                DCoordinate3 p22(+3.0, +2.0, +2.0);
                 DCoordinate3 t12(-1.0, +1.0, +2.0);
                 DCoordinate3 t22(+1.0, +1.0, +2.0);
                 arc2->SetData(0,p12);
@@ -714,9 +714,22 @@ namespace cagd
                 _hermit_cmp_curve = new HermiteCompositeCurve();
                 _hermit_cmp_curve->InsertNewArc(arc1);
                 _hermit_cmp_curve->InsertNewArc(arc2);
-                _hermit_cmp_curve->PlusFromRight(1);
-                _hermit_cmp_curve->PlusFromLeft(0);
-                _hermit_cmp_curve->MergeFromRight(0,1);
+                //_hermit_cmp_curve->PlusFromRight(1);
+                //_hermit_cmp_curve->PlusFromLeft(0);
+
+
+                //MERGE PROBA
+                //_hermit_cmp_curve->Merge(0,1,0); //jobbat ballal
+                //_hermit_cmp_curve->Merge(0,1,1);//jobb jobbal
+                //_hermit_cmp_curve->Merge(0,1,2);//bal ballal
+                _hermit_cmp_curve->Merge(0,1,3);//bal jobbal
+                _hermit_cmp_curve->SetColor(0,0,1,0);
+                //_hermit_cmp_curve->PlusFromLeft(0);
+                _hermit_cmp_curve->PlusFromRight(0);
+
+                //_hermit_cmp_curve->PlusFromRight(1);
+
+                //_hermit_cmp_curve->JoinFromRight(0,1);
                 //_hermit_cmp_curve->PlusFromRight(0);
                 //_hermit_cmp_curve->PlusFromRight(1);
                 //_hermit_cmp_curve->PlusFromRight(2);

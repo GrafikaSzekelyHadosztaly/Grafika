@@ -19,7 +19,7 @@ public:
                   public:
                       HermiteArc      *arc;
                       GenericCurve3   *image;
-                      Color4          *color;
+                      DCoordinate3    color;
                       ArcAttributes   *next;
                       ArcAttributes   *previous;
                       //konstruktor
@@ -28,7 +28,7 @@ public:
                       {
                           arc = nullptr;
                           image = nullptr;
-                          color = nullptr;
+                          color = *new DCoordinate3(1.0,0.0,0.0);
                           next = nullptr;
                           previous = nullptr;
 
@@ -39,8 +39,8 @@ protected:
             std::vector<ArcAttributes>  _arcs;
 public:
 
-            GLboolean SetDefaultData(GLuint arc_index, GLuint u_div_point_count,GLuint max_order_of_derivatives);
-            GLboolean InsertNewArc(GLuint u_div_point_count = 40,GLuint max_order_of_derivatives = 2);
+            //GLboolean SetDefaultData(GLuint arc_index, GLuint u_div_point_count,GLuint max_order_of_derivatives);
+            GLboolean InsertNewArc();
             GLboolean InsertNewArc(HermiteArc* curve);
             GLboolean RenderAll(GLboolean elso = GL_FALSE, GLboolean masod = GL_FALSE);
             GLboolean GenerateImageOfSelectedCurve(GLuint arc_index);
@@ -57,9 +57,12 @@ public:
 
             GLboolean MergeFromRight(GLuint attribute_index_1, GLuint attribute_index_2);
             GLboolean MergeFromLeft(GLuint attribute_index_1, GLuint attribute_index_2);
+            GLboolean Merge(GLuint index_of_arc1, GLuint index_of_arc2, GLuint ind);
 
             GLboolean JoinFromRight(GLuint attribute_index_1, GLuint attribute_index_2);
             GLboolean JoinFromLeft(GLuint attribute_index_1, GLuint attribute_index_2);
+
+            GLboolean SetColor(GLuint index_of_arc, float r, float g, float b);
 
             ~HermiteCompositeCurve();
 
