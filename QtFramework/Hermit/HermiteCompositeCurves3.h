@@ -7,7 +7,9 @@
 #include "../Core/Colors4.h"
 #include "../Core/GenericCurves3.h"
 #include "../Hermit/HermiteArcs3.h"
+#include <fstream>
 
+using namespace std;
 using namespace cagd;
 class HermiteCompositeCurve
 {
@@ -22,7 +24,6 @@ public:
                       DCoordinate3    color;
                       ArcAttributes   *next;
                       ArcAttributes   *previous;
-                      //konstruktor
 
                       ArcAttributes()
                       {
@@ -39,10 +40,10 @@ protected:
             std::vector<ArcAttributes>  _arcs;
 public:
 
-            //GLboolean SetDefaultData(GLuint arc_index, GLuint u_div_point_count,GLuint max_order_of_derivatives);
             GLboolean InsertNewArc();
             GLboolean InsertNewArc(HermiteArc* curve);
-            GLboolean RenderAll(GLboolean elso = GL_FALSE, GLboolean masod = GL_FALSE);
+            GLboolean InsertIsolatedCurve(vector<DCoordinate3> corners, vector<DCoordinate3> tangents);
+            GLboolean RenderAll(GLboolean der1 = GL_FALSE, GLboolean der2 = GL_FALSE);
             GLboolean GenerateImageOfSelectedCurve(GLuint arc_index);
             GLboolean GenerateImageOfCurves();
             GLboolean SetArcTransX(GLdouble x, GLuint index_of_arc);
@@ -66,9 +67,9 @@ public:
             GLboolean JoinFromLeft(GLuint attribute_index_1, GLuint attribute_index_2);
             GLboolean JoinCurves(GLuint index_of_arc_1, GLuint index_of_arc_2, GLuint case_nr);
 
-            GLboolean SetColor(GLuint index_of_arc, float r, float g, float b);
+            GLboolean SetColor(GLuint index_of_arc, float r, float g, float b);           
             GLuint GetSizeOfArcs();
-
+            void writeToFile_curve(GLuint i);
             ~HermiteCompositeCurve();
 
 };

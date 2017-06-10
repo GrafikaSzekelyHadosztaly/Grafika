@@ -713,8 +713,8 @@ namespace cagd
                 _hermit_cmp_curve = new HermiteCompositeCurve();
                 _hermit_cmp_curve->InsertNewArc(arc1);
                 _hermit_cmp_curve->InsertNewArc(arc2);
-                _hermit_cmp_curve->PlusFromRight(1);
-                _hermit_cmp_curve->PlusFromLeft(0);
+                //_hermit_cmp_curve->PlusFromRight(1);
+                //_hermit_cmp_curve->PlusFromLeft(0);
 
                 //_hermit_cmp_curve->PlusFromRight(1);
                 //_hermit_cmp_curve->PlusFromLeft(0);
@@ -728,8 +728,8 @@ namespace cagd
                 //_hermit_cmp_curve->Merge(0,1,2);//bal ballal
                // _hermit_cmp_curve->Merge(0,1,3);//bal jobbal
                 _hermit_cmp_curve->SetColor(0,0,1,0);
-                _hermit_cmp_curve->PlusFromLeft(0);
-                _hermit_cmp_curve->PlusFromRight(0);
+                //_hermit_cmp_curve->PlusFromLeft(0);
+                //_hermit_cmp_curve->PlusFromRight(0);
 
                 //_hermit_cmp_curve->PlusFromRight(1);
 
@@ -761,6 +761,8 @@ namespace cagd
                 B = 1;
                 _arc_vector_index = 0;
                 _arc_vector_nr_index = 0;
+                der1 = false;
+                der2 = false;
             }
 
         }
@@ -1055,7 +1057,7 @@ namespace cagd
                 glPopMatrix();
                 // iranytu_vege
 
-                _hermit_cmp_curve->RenderAll();
+                _hermit_cmp_curve->RenderAll(der1, der2);
             }
 
         // pops the current matrix stack, replacing the current matrix with the one below it on the stack,
@@ -1206,6 +1208,7 @@ namespace cagd
         read_patch(_file_index);
     }
 
+
     GLboolean GLWidget::read_patch(GLuint i)
     {
         string filename;
@@ -1289,6 +1292,54 @@ namespace cagd
 
         return GL_TRUE;
     }
+
+    void GLWidget::call_read_curve()
+    {
+        read_curve(_file_index);
+    }
+
+    GLboolean GLWidget::read_curve(GLuint i)
+    {
+        string filename;
+        if(i < 10)
+            filename = "Curves/curve0" + to_string(i) + ".txt";
+        else
+            filename = "Curves/curve" + to_string(i) + ".txt";
+
+        ifstream file(filename);
+        if(!file.good())
+        {
+            cout << "Curve file " << filename<< " does not exist" << endl;
+            return GL_FALSE;
+        }
+
+        float x, y, z;
+
+        vector<DCoordinate3> corners;
+        corners.resize(2);
+        file >> x >> y >> z;
+        DCoordinate3 corners0(x, y, z);
+        file >> x >> y >> z;
+        DCoordinate3 corners1(x, y, z);
+        corners[0] = corners0;
+        corners[1] = corners1;
+
+        vector<DCoordinate3> tangents;
+        tangents.resize(2);
+        file >> x >> y >> z;
+        DCoordinate3 tangents0(x, y, z);
+        file >> x >> y >> z;
+        DCoordinate3 tangents1(x, y, z);
+        tangents[0] = tangents0;
+        tangents[1] = tangents1;
+
+        _hermit_cmp_curve->InsertIsolatedCurve(corners, tangents);
+
+        file.close();
+
+        return GL_TRUE;
+    }
+
 
     void GLWidget::call_write_patch(){
         if(_patch_index < _hermite_surface->GetNumberOfPatches()){
@@ -1916,4 +1967,30 @@ namespace cagd
             _hermit_cmp_curve->JoinCurves(_selected_curve1,_selected_curve2,d);
         }
     }
+
+    void GLWidget::call_write_curve(){
+        if(index_of_curve < _hermit_cmp_curve->GetSizeOfArcs()) {
+            _hermit_cmp_curve->writeToFile_curve(index_of_curve);
+        }
+        else{
+            cout << "Curve index " << index_of_curve << " does not exist!" << endl;
+        }
+    }
+    void GLWidget::set_der1(bool value)
+    {
+        if(value != der1)
+        {
+            der1 = value;
+            updateGL();
+        }
+    }
+    void GLWidget::set_der2(bool value)
+    {
+        if(value != der2)
+        {
+            der2 = value;
+            updateGL();
+        }
+    }
+
 }

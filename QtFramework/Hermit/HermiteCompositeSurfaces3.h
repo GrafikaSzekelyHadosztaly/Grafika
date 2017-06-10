@@ -5,6 +5,7 @@
 #include "Core/Materials.h"
 #include "Core/ShaderPrograms.h"
 #include "Core/Matrices.h"
+#include <fstream>
 
 using namespace std;
 

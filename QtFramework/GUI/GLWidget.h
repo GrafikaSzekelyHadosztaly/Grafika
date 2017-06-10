@@ -131,6 +131,8 @@ namespace cagd
         float       R;
         float       G;
         float       B;
+        bool        der1;
+        bool        der2;
 
 
     //protected:
@@ -169,6 +171,14 @@ namespace cagd
         GLboolean read_patch(GLuint i);
 
         void call_write_patch();
+
+        // curve olvasa es irasa allomanyba
+
+        void call_write_curve();
+
+        void call_read_curve();
+        GLboolean read_curve(GLuint index);
+
         // patch attributumok valtoztatasa
         void set_patch_index(int);
         GLboolean set_shader_index(int);
@@ -191,6 +201,8 @@ namespace cagd
         void set_G(double);
         void set_B(double);
         void set_curve_color();
+        void set_der1(bool);
+        void set_der2(bool);
 
         GLboolean call_extend_patch();
         GLboolean call_extend_new_patch();
@@ -231,6 +243,7 @@ namespace cagd
         void arc_vector_minus_X();
         void arc_vector_minus_Y();
         void arc_vector_minus_Z();
+
 
 
     private slots:
