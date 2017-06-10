@@ -1519,8 +1519,6 @@ namespace cagd
     GLboolean GLWidget::set_corners_index(int value)
     {
 
-        cout << "Juhuj1:" << endl;// text << endl;
-
         _corner_index = value;
 
         return GL_TRUE;
@@ -1529,8 +1527,6 @@ namespace cagd
     GLboolean GLWidget::set_vectors_index(int value)
     {
 
-        cout << "Juhuj2:" << endl;// text << endl;
-
         _vector_index = value;
 
         return GL_TRUE;
@@ -1538,21 +1534,18 @@ namespace cagd
 
     GLboolean GLWidget::_xValue_changed(double value)
     {
-        cout << "xValue:" << endl;// text << endl;
         _xValue = value;
         return GL_TRUE;
     }
 
     GLboolean GLWidget::_yValue_changed(double value)
     {
-         cout << "yValue:" << endl;// text << endl;
         _yValue = value;
         return GL_TRUE;
     }
 
     GLboolean GLWidget::_zValue_changed(double value)
     {
-         cout << "zValue:" << endl;// text << endl;
          _zValue = value;
         return GL_TRUE;
     }
@@ -1560,7 +1553,10 @@ namespace cagd
 
     GLboolean GLWidget::_change_bt_clicked()
     {
-        cout << "Klikk:" << _xValue <<" " << _yValue << " " << _zValue << endl;
+        cout << "Klikk - koordinatak:" << _xValue <<" " << _yValue << " " << _zValue << endl;
+
+        _hermite_surface->setVectorXYZ(_vector_index,_corner_index,_xValue,_yValue,_zValue,_patch_index);
+
         return GL_TRUE;
     }
 
