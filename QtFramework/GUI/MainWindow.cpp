@@ -169,6 +169,10 @@ namespace cagd
         // _btn_Color
         connect(_side_widget->_btn_Color, SIGNAL(pressed()), _gl_widget, SLOT(set_curve_color()));
 
+        //DERIVATIVES _cb_der1 _cb_der2
+        connect(_side_widget->_cb_der1,SIGNAL(clicked(bool)),_gl_widget,SLOT(set_der1(bool)) );
+        connect(_side_widget->_cb_der2,SIGNAL(clicked(bool)),_gl_widget,SLOT(set_der2(bool)) );
+
 
     }
 

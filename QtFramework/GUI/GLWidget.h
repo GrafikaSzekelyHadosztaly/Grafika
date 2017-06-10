@@ -131,6 +131,8 @@ namespace cagd
         float       R;
         float       G;
         float       B;
+        bool        der1;
+        bool        der2;
 
 
     //protected:
@@ -191,6 +193,8 @@ namespace cagd
         void set_G(double);
         void set_B(double);
         void set_curve_color();
+        void set_der1(bool);
+        void set_der2(bool);
 
         GLboolean call_extend_patch();
         GLboolean call_extend_new_patch();

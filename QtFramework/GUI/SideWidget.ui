@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>294</width>
-    <height>699</height>
+    <width>297</width>
+    <height>778</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -356,7 +356,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -1657,6 +1657,32 @@
      </property>
     </widget>
    </widget>
+  </widget>
+  <widget class="QCheckBox" name="_cb_der1">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>710</y>
+     <width>91</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Derivatives 1</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="_cb_der2">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>730</y>
+     <width>91</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Derivatives 2</string>
+   </property>
   </widget>
  </widget>
  <resources/>
