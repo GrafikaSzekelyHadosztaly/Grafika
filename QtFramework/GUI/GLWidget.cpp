@@ -1818,25 +1818,27 @@ namespace cagd
     }
 
     GLboolean GLWidget::call_extend_curve(){
-        GLuint n = size;
+        GLuint n = _hermit_cmp_curve->GetSizeOfArcs();
         if(_selected_curve1 >= n){
             cout << "The selected curve does not exist!\n";
             return GL_FALSE;
         }
 
-        if(_direction1 == 0 && _hermit_cmp_curve[_selected_curve1].previous != nullptr
-                || _direction1 == 1 && _hermit_cmp_curve[_selected_curve1].next != nullptr){
-            cout << "The selected direction is no free!\n";
-            return GL_FALSE;
-        }
 
+        if(_direction1 == 0){
+            return _hermit_cmp_curve->PlusFromLeft(_selected_curve1);
+        }
+        else{
+            return _hermit_cmp_curve->PlusFromRight(_selected_curve1);
+        }
     }
 
     GLboolean GLWidget::call_merge_curve(){
-
+        return GL_TRUE;
     }
 
     GLboolean GLWidget::call_join_curve(){
 
+        return GL_TRUE;
     }
 }
