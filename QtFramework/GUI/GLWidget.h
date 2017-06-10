@@ -28,6 +28,7 @@ namespace cagd
 
     private:
 
+
         // variables defining the projection matrix
         float       _aspect;            // aspect ratio of the rendering window
         float       _fovy;              // field of view in direction y
@@ -103,6 +104,14 @@ namespace cagd
         GLuint _patch2_index;
         GLuint _dir1;
         GLuint _dir2;
+        //sarok cb_index, vektor cb_index
+        GLuint _corner_index;
+        GLuint _vector_index;
+
+        GLdouble _xValue;
+        GLdouble _yValue;
+        GLdouble _zValue;
+
 
     //protected:
 
@@ -158,6 +167,14 @@ namespace cagd
         void plus_Z();
         void minus_Z();
 
+        //egy sarok vektorertekeinek valtoztatasai - (x,y,z)
+        GLboolean set_corners_index(int);
+        GLboolean set_vectors_index(int);
+        GLboolean _xValue_changed(double);
+        GLboolean _yValue_changed(double);
+        GLboolean _zValue_changed(double);
+
+        GLboolean _change_bt_clicked();
     private slots:
         void _animate();
     };

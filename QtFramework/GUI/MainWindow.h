@@ -5,6 +5,7 @@
 #include "SideWidget.h"
 #include "GLWidget.h"
 #include <QScrollArea>
+#include "SideWidget.h"
 
 namespace cagd
 {
@@ -19,6 +20,7 @@ namespace cagd
         QScrollArea *_scroll_area;      // provides a scrolling view onto our side widget
 
     public:
+
         // special and default constructor
         MainWindow(QWidget *parent = 0);
 

@@ -121,7 +121,20 @@ namespace cagd
         connect(_side_widget->plus_Z_btn, SIGNAL(pressed()), _gl_widget, SLOT(plus_Z()));
         connect(_side_widget->minus_Z_btn, SIGNAL(pressed()), _gl_widget, SLOT(minus_Z()));
 
+        //egy sarok vektorertekeinek valtoztatasai - (x,y,z)
+
+        //connect(_side_widget->_corners_cb, SIGNAL(currentIndexChanged(int)), _gl_widget, SLOT(set_corners_index(int, string text = _side_widget->_xValue_tb->text())));
+
+        connect(_side_widget->_corners_cb, SIGNAL(currentIndexChanged(int)), _gl_widget, SLOT(set_corners_index(int)));
+
+        connect(_side_widget->_xValue_tb, SIGNAL(valueChanged(double)), _gl_widget, SLOT(_xValue_changed(double)));
+        connect(_side_widget->_yValue_tb, SIGNAL(valueChanged(double)), _gl_widget, SLOT(_yValue_changed(double)));
+        connect(_side_widget->_zValue_tb, SIGNAL(valueChanged(double)), _gl_widget, SLOT(_zValue_changed(double)));
+
+        connect(_side_widget->_change_bt, SIGNAL(pressed()), _gl_widget, SLOT(_change_bt_clicked()));
+
     }
+
 
     //--------------------------------
     // implementation of private slots

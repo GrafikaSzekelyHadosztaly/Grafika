@@ -24,6 +24,7 @@ namespace cagd
         _timer = new QTimer(this);
         _timer->setInterval(0);
 
+
         connect(_timer, SIGNAL(timeout()),this, SLOT(_animate()));
     }
 
@@ -546,6 +547,12 @@ namespace cagd
                 _shader_index = 0;
                 _material_index = 0;
                 _patch1_index = 0;
+                _corner_index = 0;
+                _vector_index = 0;
+                _xValue = 0;
+                _yValue = 0;
+                _zValue = 0;
+
                 //_hermite_surface->SetSelectedMaterial(_patch1_index,&MatFBRuby);
                 _patch2_index = 1;
                 //_hermite_surface->SetSelectedMaterial(_patch2_index,&MatFBRuby);
@@ -649,6 +656,11 @@ namespace cagd
                 //_hermite_surface->MergeTwoPatches(0, 1, 4, 0);
                 //_hermite_surface->JoinTwoPatches(0, 1, 4, 0);
                 //_hermite_surface->ExtendPatch(1, 4);
+
+                //init vectors value (X,Y,Z)
+
+
+
             }
 
         }
@@ -1146,6 +1158,7 @@ namespace cagd
 
     GLboolean GLWidget::set_shader_index(int value)
     {
+
         GLuint n = _hermite_surface->GetNumberOfPatches();
         if(_patch_index > n - 1)
         {
@@ -1375,4 +1388,54 @@ namespace cagd
         _hermite_surface->SetTransZ(_patch_index, -0.1);
         updateGL();
     }
+
+    GLboolean GLWidget::set_corners_index(int value)
+    {
+
+        cout << "Juhuj1:" << endl;// text << endl;
+
+        _corner_index = value;
+
+        return GL_TRUE;
+    }
+
+    GLboolean GLWidget::set_vectors_index(int value)
+    {
+
+        cout << "Juhuj2:" << endl;// text << endl;
+
+        _vector_index = value;
+
+        return GL_TRUE;
+    }
+
+    GLboolean GLWidget::_xValue_changed(double value)
+    {
+        cout << "xValue:" << endl;// text << endl;
+        _xValue = value;
+        return GL_TRUE;
+    }
+
+    GLboolean GLWidget::_yValue_changed(double value)
+    {
+         cout << "yValue:" << endl;// text << endl;
+        _yValue = value;
+        return GL_TRUE;
+    }
+
+    GLboolean GLWidget::_zValue_changed(double value)
+    {
+         cout << "zValue:" << endl;// text << endl;
+         _zValue = value;
+        return GL_TRUE;
+    }
+
+
+    GLboolean GLWidget::_change_bt_clicked()
+    {
+        cout << "Klikk:" << _xValue <<" " << _yValue << " " << _zValue << endl;
+        return GL_TRUE;
+    }
+
+
 }
