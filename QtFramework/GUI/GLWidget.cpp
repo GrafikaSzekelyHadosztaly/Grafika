@@ -1414,6 +1414,12 @@ namespace cagd
             return GL_FALSE;
         }
 
+        if(_dir1 % 2 == 1)
+        {
+            cout << "Extend new can be only done in sides" << endl;
+            return GL_FALSE;
+        }
+
         return _hermite_surface->ExtendNewPatch(_patch1_index, _dir1);
     }
 
