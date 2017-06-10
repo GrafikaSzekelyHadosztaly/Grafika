@@ -761,6 +761,8 @@ namespace cagd
                 B = 1;
                 _arc_vector_index = 0;
                 _arc_vector_nr_index = 0;
+                der1 = false;
+                der2 = false;
             }
 
         }
@@ -1055,7 +1057,7 @@ namespace cagd
                 glPopMatrix();
                 // iranytu_vege
 
-                _hermit_cmp_curve->RenderAll(true, false);
+                _hermit_cmp_curve->RenderAll(der1, der2);
             }
 
         // pops the current matrix stack, replacing the current matrix with the one below it on the stack,
@@ -1841,4 +1843,22 @@ namespace cagd
 
         return GL_TRUE;
     }
+
+    void GLWidget::set_der1(bool value)
+    {
+        if(value != der1)
+        {
+            der1 = value;
+            updateGL();
+        }
+    }
+    void GLWidget::set_der2(bool value)
+    {
+        if(value != der2)
+        {
+            der2 = value;
+            updateGL();
+        }
+    }
+
 }

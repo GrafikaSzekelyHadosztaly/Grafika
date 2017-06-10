@@ -48,7 +48,7 @@ GLboolean HermiteCompositeCurve::InsertNewArc(HermiteArc *curve)
     return GenerateImageOfSelectedCurve(size);
 }
 
-GLboolean HermiteCompositeCurve::RenderAll(GLboolean elso, GLboolean masod){
+GLboolean HermiteCompositeCurve::RenderAll(GLboolean der1, GLboolean der2){
     for(GLuint i = 0;i < _arcs.size();i++)
     {
         if (!_arcs[i].image )//|| !_attributes[x].material)// || !_attributes[x].shader)
@@ -62,13 +62,13 @@ GLboolean HermiteCompositeCurve::RenderAll(GLboolean elso, GLboolean masod){
          _arcs[i].image->RenderDerivatives(0,GL_LINE_STRIP);
 
 
-         if (elso) {
+         if (der1) {
              glColor3f(0.0,0.5,0.0);
             _arcs[i].image ->RenderDerivatives(1,GL_LINES);
             _arcs[i].image ->RenderDerivatives(1,GL_POINTS);
          }
 
-         if (masod) {
+         if (der2) {
             glColor3f(0.1,0.5,0.9);
             _arcs[i].image ->RenderDerivatives(2,GL_LINES);
             _arcs[i].image ->RenderDerivatives(2,GL_POINTS);
